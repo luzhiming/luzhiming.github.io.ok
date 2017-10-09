@@ -46,7 +46,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="" class="profilepic">
-			<img src="" class="js-avatar">
+			<img src="/images/user.jpg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="">鲁志明</a></h1>
@@ -59,10 +59,6 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
-	        
-				<li><a href="/">视频教程</a></li>
-	        
-				<li><a href="/categories/博客">博客</a></li>
 	        
 				<li><a href="/categories/随笔">随笔</a></li>
 	        
@@ -86,11 +82,7 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
-		        
-					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-		        
-					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
+					<a class="github" target="_blank" href="https://github.com/luzhiming" title="github"><i class="icon-github"></i></a>
 		        
 			</div>
 		</nav>
@@ -108,7 +100,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="" class="js-avatar">
+				<img src="/images/user.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">鲁志明</h1>
@@ -122,35 +114,23 @@
 			
 				
 			
-				
-			
-				
-			
 			
 			
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
-			        
-						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-			        
-						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
+						<a class="github" target="_blank" href="https://github.com/luzhiming" title="github"><i class="icon-github"></i></a>
 			        
 				</div>
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 70%">
+				<ul style="width: 50%">
 				
 				
-					<li style="width: 25%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/">视频教程</a></li>
-		        
-					<li style="width: 25%"><a href="/categories/博客">博客</a></li>
-		        
-					<li style="width: 25%"><a href="/categories/随笔">随笔</a></li>
+					<li style="width: 50%"><a href="/categories/随笔">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -187,22 +167,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本文记录了如何利用github+hexo搭建一个个人网页的过程。</p>
-<h2 id="基础准备"><a href="#基础准备" class="headerlink" title="基础准备"></a>基础准备</h2><h3 id="github的准备"><a href="#github的准备" class="headerlink" title="github的准备"></a>github的准备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">拥有一个github帐号</div><div class="line">创建一个仓库，仓库的名字是:github用户名.github.io</div></pre></td></tr></table></figure>
-<h3 id="购买独立域名"><a href="#购买独立域名" class="headerlink" title="购买独立域名"></a>购买独立域名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">万网申请独立域名</div><div class="line">ping github用户名.github.io 获得ip地址如:xxx.xxx.xxx.xxx</div><div class="line">域名做cname解析到上一步获得的ip</div></pre></td></tr></table></figure>
-<h3 id="github仓库传CNAME文件"><a href="#github仓库传CNAME文件" class="headerlink" title="github仓库传CNAME文件"></a>github仓库传CNAME文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git仓库中建立CNAME文件,文件内容为:第二步购买的域名</div></pre></td></tr></table></figure>
-<h2 id="安装HEXO"><a href="#安装HEXO" class="headerlink" title="安装HEXO"></a>安装HEXO</h2><h3 id="安装NodeJs"><a href="#安装NodeJs" class="headerlink" title="安装NodeJs"></a>安装NodeJs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">由于Hexo是基于nodeJs环境的静态博客，npm工具非常有用，所以我们需要安装nodejs,去官网下载最新版本按照即可</div></pre></td></tr></table></figure>
-<h3 id="安装hexo-执行如下命令"><a href="#安装hexo-执行如下命令" class="headerlink" title="安装hexo,执行如下命令"></a>安装hexo,执行如下命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i -g hexo</div></pre></td></tr></table></figure>
-<h3 id="新建一个文件"><a href="#新建一个文件" class="headerlink" title="新建一个文件"></a>新建一个文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<h3 id="先清理hexo缓存"><a href="#先清理hexo缓存" class="headerlink" title="先清理hexo缓存"></a>先清理hexo缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div></pre></td></tr></table></figure>
-<h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<h3 id="启动服务，访问localhost-4000"><a href="#启动服务，访问localhost-4000" class="headerlink" title="启动服务，访问localhost:4000"></a>启动服务，访问localhost:4000</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<h3 id="部署到git服务器"><a href="#部署到git服务器" class="headerlink" title="部署到git服务器"></a>部署到git服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">首先需要在hexo的_config.yml中配置选项</div><div class="line">使用:hexo deploy 发布</div></pre></td></tr></table></figure>
-<p>##关于主题</p>
-<p>hexo支持主题，目前也有非常多优秀的主题给大家用</p>
-<h3 id="下载yilia主题"><a href="#下载yilia主题" class="headerlink" title="下载yilia主题"></a>下载yilia主题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">clone</span> https://github.com/litten/hexo-theme-yilia.git themes/yilia</div></pre></td></tr></table></figure>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ 修改hexo的_config.yml 的theme属性为yilia</div></pre></td></tr></table></figure>
-
+        <p>本文记录了如何利用github+hexo搭建一个个人网页的过程。适合初学者从头开始搭建一个属于自己的博客。<br>
+        
       
 
       
@@ -255,91 +221,6 @@
 
 
   
-    <article id="post-随笔/article-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/09/随笔/article-test/">这个是测试文章</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/09/随笔/article-test/" class="archive-article-date">
-  	<time datetime="2017-10-09T05:23:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>飒飒飒飒的三大<br><!-- 哈哈 --><br>滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答滴答<br>阿萨德发地方撒旦法撒旦发射点发撒旦发射发达省份撒地方撒旦方法电视发射点发阿双方大是大非撒发射发达撒发达省份的稍等撒发射发达撒旦发射点发阿双方sad方式</p>
-<video src="https://raw.githubusercontent.com/luzhiming/testforvideo/master/1.mp4"></video>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/09/随笔/article-test/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -350,10 +231,10 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 鲁志明
+    		&copy; 2015-2017 鲁志明
     	</div>
       	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      		<!--<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten-->
       	</div>
     </div>
   </div>
@@ -431,10 +312,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">测试</a>
-              </li>
             
             <div class="clearfix"></div>
           </ul>

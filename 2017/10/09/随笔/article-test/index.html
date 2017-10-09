@@ -24,7 +24,7 @@
     <link rel="alternative" href="/atom.xml" title="鲁志明" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/img/user.jpg">
   
   <link rel="stylesheet" type="text/css" href="/./main.507b3a.css">
   <style type="text/css">
@@ -64,7 +64,7 @@
 	        
 				<li><a href="/">视频教程</a></li>
 	        
-				<li><a href="/">博客</a></li>
+				<li><a href="/categories/博客">博客</a></li>
 	        
 				<li><a href="/categories/随笔">随笔</a></li>
 	        
@@ -93,8 +93,6 @@
 					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
 		        
 					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
 		        
 			</div>
 		</nav>
@@ -141,8 +139,6 @@
 			        
 						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
 			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
-			        
 				</div>
 			</nav>
 
@@ -154,7 +150,7 @@
 		        
 					<li style="width: 25%"><a href="/">视频教程</a></li>
 		        
-					<li style="width: 25%"><a href="/">博客</a></li>
+					<li style="width: 25%"><a href="/categories/博客">博客</a></li>
 		        
 					<li style="width: 25%"><a href="/categories/随笔">随笔</a></li>
 		        
@@ -309,6 +305,22 @@
 
   
 
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "http://luzhiming.github.io/2017/10/09/随笔/article-test/",
+  owner: 'true',
+  repo: 'myblogcomment',
+  oauth: {
+    client_id: '4da4d52897a05528b8d9',
+    client_secret: '369dbb10d63d89e497b6b99a469759f7204caeee',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
   
 
 

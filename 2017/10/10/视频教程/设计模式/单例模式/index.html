@@ -53,22 +53,16 @@
 <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/user.jpg?v=5.1.3">
 
 
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+
+  <meta name="keywords" content="设计模式," />
 
 
 
@@ -79,17 +73,18 @@
 
 
 
-<meta name="description" content="观察者模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。">
+<meta name="description" content="单例模式模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。">
+<meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式-观察者模式">
-<meta property="og:url" content="http://luzhiming.github.io/2017/10/10/视频教程/设计模式/设计模式/index.html">
-<meta property="og:site_name" content="鲁志明">
-<meta property="og:description" content="观察者模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。">
+<meta property="og:title" content="设计模式-单例模式">
+<meta property="og:url" content="http://luzhiming.github.io/2017/10/10/视频教程/设计模式/单例模式/index.html">
+<meta property="og:site_name" content="码上公益">
+<meta property="og:description" content="单例模式模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-10T02:15:07.744Z">
+<meta property="og:updated_time" content="2017-10-10T05:16:21.097Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式-观察者模式">
-<meta name="twitter:description" content="观察者模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。">
+<meta name="twitter:title" content="设计模式-单例模式">
+<meta name="twitter:description" content="单例模式模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。">
 
 
 
@@ -119,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="http://luzhiming.github.io/2017/10/10/视频教程/设计模式/设计模式/"/>
+  <link rel="canonical" href="http://luzhiming.github.io/2017/10/10/视频教程/设计模式/单例模式/"/>
 
 
 
 
 
-  <title>设计模式-观察者模式 | 鲁志明</title>
+  <title>设计模式-单例模式 | 码上公益</title>
   
 
 
@@ -155,12 +150,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">鲁志明</span>
+        <span class="site-title">码上公益</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle">码上公益</p>
+        <p class="site-subtitle"></p>
       
   </div>
 
@@ -188,18 +183,18 @@
         </li>
       
         
-        <li class="menu-item menu-item-随笔">
-          <a href="/categories/随笔" rel="section">
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
             
-            随笔
+            标签
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-设计模式教程">
-          <a href="/categories/视频教程-设计模式" rel="section">
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
             
-            设计模式教程
+            分类
           </a>
         </li>
       
@@ -236,16 +231,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://luzhiming.github.io/2017/10/10/视频教程/设计模式/设计模式/">
+    <link itemprop="mainEntityOfPage" href="http://luzhiming.github.io/2017/10/10/视频教程/设计模式/单例模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="鲁志明">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/user.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="鲁志明">
+      <meta itemprop="name" content="码上公益">
     </span>
 
     
@@ -253,7 +248,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">设计模式-观察者模式</h1>
+          <h1 class="post-title" itemprop="name headline">设计模式-单例模式</h1>
         
 
         <div class="post-meta">
@@ -288,8 +283,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/视频教程-设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">视频教程-设计模式</span>
+                  <a href="/categories/视频教程/" itemprop="url" rel="index">
+                    <span itemprop="name">视频教程</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/视频教程/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
                   </a>
                 </span>
 
@@ -325,8 +331,8 @@
       
 
       
-        <p>观察者模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。<br><a id="more"></a></p>
-<h2 id="什么是观察者设计模式"><a href="#什么是观察者设计模式" class="headerlink" title="什么是观察者设计模式"></a>什么是观察者设计模式</h2>
+        <p>单例模式模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。<br><a id="more"></a></p>
+<h2 id="什么是单例模式"><a href="#什么是单例模式" class="headerlink" title="什么是单例模式"></a>什么是单例模式</h2>
       
     </div>
     
@@ -336,10 +342,40 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="鲁志明 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+        </div>
       
 
       
@@ -350,8 +386,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/09/随笔/如何利用github+hexo搭建一个个人网页/" rel="next" title="如何利用github+hexo搭建一个个人网页">
-                <i class="fa fa-chevron-left"></i> 如何利用github+hexo搭建一个个人网页
+              <a href="/2017/10/10/视频教程/设计模式/观察者模式/" rel="next" title="设计模式-观察者模式">
+                <i class="fa fa-chevron-left"></i> 设计模式-观察者模式
               </a>
             
           </div>
@@ -424,8 +460,12 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/user.jpg"
+                alt="鲁志明" />
+            
               <p class="site-author-name" itemprop="name">鲁志明</p>
-              <p class="site-description motion-element" itemprop="description">码上公益主要分享自己工作中的技术经验总结，另外也欢迎各位同学投稿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
@@ -435,7 +475,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -445,13 +485,22 @@
               
               
               <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">2</span>
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
-                
+                </a>
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
@@ -466,6 +515,20 @@
           
 
           
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://gongyi.baidu.com" title="百度公益" target="_blank">百度公益</a>
+                  </li>
+                
+              </ul>
+            </div>
           
 
           
@@ -483,7 +546,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是观察者设计模式"><span class="nav-number">1.</span> <span class="nav-text">什么是观察者设计模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是单例模式"><span class="nav-number">1.</span> <span class="nav-text">什么是单例模式</span></a></li></ol></div>
             
 
           </div>

@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="Spring Cloud Eureka@(Eureka) [TOC] 基本原理讲解服务注册与发现服务注册与发现包含两个部分，分别是:  服务注册 将某些服务注册到服务注册中心 服务发现 在服务注册中心寻找发现某些服务  服务注册中心可以接收服务的注册，并且接收对与服务的查询（比如:A要调用B服务，A需要到服务注册中心去寻找是否有B服务）。并且还需要有其他的一些功能，比如:监测服务的健康状态，服务的">
+<meta name="description" content="本文主要简单介绍了Eureka、Feign、Ribbon、Hyxtrix的简要使用，欢迎大家阅读。">
 <meta name="keywords" content="Spring Cloud">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring Cloud Eureka">
 <meta property="og:url" content="http://luzhiming.github.io/2017/12/05/SpringCloud/eureka/index.html">
 <meta property="og:site_name" content="MarsYi.com-码上益">
-<meta property="og:description" content="Spring Cloud Eureka@(Eureka) [TOC] 基本原理讲解服务注册与发现服务注册与发现包含两个部分，分别是:  服务注册 将某些服务注册到服务注册中心 服务发现 在服务注册中心寻找发现某些服务  服务注册中心可以接收服务的注册，并且接收对与服务的查询（比如:A要调用B服务，A需要到服务注册中心去寻找是否有B服务）。并且还需要有其他的一些功能，比如:监测服务的健康状态，服务的">
+<meta property="og:description" content="本文主要简单介绍了Eureka、Feign、Ribbon、Hyxtrix的简要使用，欢迎大家阅读。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-05T11:34:06.892Z">
+<meta property="og:updated_time" content="2017-12-05T11:45:22.545Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Cloud Eureka">
-<meta name="twitter:description" content="Spring Cloud Eureka@(Eureka) [TOC] 基本原理讲解服务注册与发现服务注册与发现包含两个部分，分别是:  服务注册 将某些服务注册到服务注册中心 服务发现 在服务注册中心寻找发现某些服务  服务注册中心可以接收服务的注册，并且接收对与服务的查询（比如:A要调用B服务，A需要到服务注册中心去寻找是否有B服务）。并且还需要有其他的一些功能，比如:监测服务的健康状态，服务的">
+<meta name="twitter:description" content="本文主要简单介绍了Eureka、Feign、Ribbon、Hyxtrix的简要使用，欢迎大家阅读。">
 
 
 
@@ -308,9 +308,8 @@
       
 
       
-        <h1 id="Spring-Cloud-Eureka"><a href="#Spring-Cloud-Eureka" class="headerlink" title="Spring Cloud Eureka"></a>Spring Cloud Eureka</h1><p>@(Eureka)</p>
-<p>[TOC]</p>
-<h2 id="基本原理讲解"><a href="#基本原理讲解" class="headerlink" title="基本原理讲解"></a>基本原理讲解</h2><p><strong>服务注册与发现</strong><br>服务注册与发现包含两个部分，分别是:</p>
+        <p>本文主要简单介绍了Eureka、Feign、Ribbon、Hyxtrix的简要使用，欢迎大家阅读。<br><a id="more"></a></p>
+<h1 id="Spring-Cloud-Eureka"><a href="#Spring-Cloud-Eureka" class="headerlink" title="Spring Cloud Eureka"></a>Spring Cloud Eureka</h1><h2 id="基本原理讲解"><a href="#基本原理讲解" class="headerlink" title="基本原理讲解"></a>基本原理讲解</h2><p><strong>服务注册与发现</strong><br>服务注册与发现包含两个部分，分别是:</p>
 <ul>
 <li><strong>服务注册</strong> 将某些服务<strong>注册</strong>到<strong>服务注册中心</strong></li>
 <li><strong>服务发现</strong> 在<strong>服务注册中心</strong>寻找发现某些服务</li>

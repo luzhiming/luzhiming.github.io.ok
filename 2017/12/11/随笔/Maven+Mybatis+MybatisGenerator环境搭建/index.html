@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/user.jpg?v=5.1.3">
+
+
+
+
+
+
+  <meta name="keywords" content="随笔," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文主要简单介绍了Maven项目如何整合MybatisGenerator来实现快速生成Dao及Mapper配置文件等。">
+<meta name="keywords" content="随笔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven+Mybatis+MybatisGenerator环境搭建">
+<meta property="og:url" content="http://luzhiming.github.io/2017/12/11/随笔/Maven+Mybatis+MybatisGenerator环境搭建/index.html">
+<meta property="og:site_name" content="MarsYi.com-码上益">
+<meta property="og:description" content="本文主要简单介绍了Maven项目如何整合MybatisGenerator来实现快速生成Dao及Mapper配置文件等。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-12-11T09:00:59.474Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maven+Mybatis+MybatisGenerator环境搭建">
+<meta name="twitter:description" content="本文主要简单介绍了Maven项目如何整合MybatisGenerator来实现快速生成Dao及Mapper配置文件等。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://luzhiming.github.io/2017/12/11/随笔/Maven+Mybatis+MybatisGenerator环境搭建/"/>
+
+
+
+
+
+  <title>Maven+Mybatis+MybatisGenerator环境搭建 | MarsYi.com-码上益</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f7673dec99776550cad7d9ca44e6b1f5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MarsYi.com-码上益</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://luzhiming.github.io/2017/12/11/随笔/Maven+Mybatis+MybatisGenerator环境搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MarsYi.com-码上益">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/wechat_me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MarsYi.com-码上益">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Maven+Mybatis+MybatisGenerator环境搭建</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-11T16:05:03+08:00">
+                2017-12-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文主要简单介绍了Maven项目如何整合MybatisGenerator来实现快速生成Dao及Mapper配置文件等。<br><a id="more"></a></p>
+<p>由于项目历史原因，项目开发初期的技术栈并不是一套技术栈，一个子系统采用了PHP，而其他子系统均采用Java开发的。<br>为了方便接入SpringCloud各个模块以及方便之后PHP那个子系统的维护，所以首先改造的第一步就是给PHP先提供一个简单的数据访问接口。<br>为了快速方便且稳定，准备接入MybatisGenerator.</p>
+<h1 id="直接进入实战"><a href="#直接进入实战" class="headerlink" title="直接进入实战"></a>直接进入实战</h1><h2 id="1-在maven工程的resources目录下建立一个generator-xml-并做如下配置"><a href="#1-在maven工程的resources目录下建立一个generator-xml-并做如下配置" class="headerlink" title="1.在maven工程的resources目录下建立一个generator.xml,并做如下配置"></a>1.在maven工程的resources目录下建立一个generator.xml,并做如下配置</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</div><div class="line">&lt;!DOCTYPE generatorConfiguration</div><div class="line">        PUBLIC <span class="string">"-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"</span></div><div class="line">        <span class="string">"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"</span>&gt;</div><div class="line"></div><div class="line">&lt;generatorConfiguration&gt;</div><div class="line">    &lt;!--mysql 连接数据库jar 这里选择自己本地位置--&gt;</div><div class="line">    &lt;classPathEntry</div><div class="line">            location=<span class="string">"C:/Users/Administrator/.m2/repository/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar"</span> /&gt;</div><div class="line">    &lt;context id=<span class="string">"testTables"</span> targetRuntime=<span class="string">"MyBatis3"</span>&gt;</div><div class="line">        &lt;commentGenerator&gt;</div><div class="line">            &lt;!-- 是否去除自动生成的注释 <span class="keyword">true</span>：是 ： <span class="keyword">false</span>:否 --&gt;</div><div class="line">            &lt;property name=<span class="string">"suppressAllComments"</span> value=<span class="string">"true"</span> /&gt;</div><div class="line">        &lt;/commentGenerator&gt;</div><div class="line">        &lt;!--数据库连接的信息：驱动类、连接地址、用户名、密码 --&gt;</div><div class="line">        &lt;jdbcConnection driverClass=<span class="string">"com.mysql.jdbc.Driver"</span></div><div class="line">                        connectionURL=<span class="string">"jdbc:mysql://xx.xx.xx.xx:4318/dbname"</span> userId=<span class="string">"dbUserName"</span></div><div class="line">                        password=<span class="string">"dbPassWord"</span>&gt;</div><div class="line">        &lt;/jdbcConnection&gt;</div><div class="line">        &lt;!-- 默认<span class="keyword">false</span>，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 <span class="keyword">true</span>时把JDBC DECIMAL 和</div><div class="line">           NUMERIC 类型解析为java.math.BigDecimal --&gt;</div><div class="line">        &lt;javaTypeResolver&gt;</div><div class="line">            &lt;property name=<span class="string">"forceBigDecimals"</span> value=<span class="string">"false"</span> /&gt;</div><div class="line">        &lt;/javaTypeResolver&gt;</div><div class="line"></div><div class="line">        &lt;!-- targetProject:生成PO类的位置 --&gt;</div><div class="line">        &lt;javaModelGenerator targetPackage=<span class="string">"com.xx.pojo"</span></div><div class="line">                            targetProject=<span class="string">"src/main/java"</span>&gt;</div><div class="line">            &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</div><div class="line">            &lt;property name=<span class="string">"enableSubPackages"</span> value=<span class="string">"false"</span> /&gt;</div><div class="line">            &lt;!-- 从数据库返回的值被清理前后的空格 --&gt;</div><div class="line">            &lt;property name=<span class="string">"trimStrings"</span> value=<span class="string">"true"</span> /&gt;</div><div class="line">        &lt;/javaModelGenerator&gt;</div><div class="line">        &lt;!-- targetProject:mapper映射文件生成的位置--&gt;</div><div class="line">        &lt;!--如果maven工程只是单独的一个工程，targetProject=<span class="string">"src/main/java"</span>若果maven工程是分模块的工程，targetProject=<span class="string">"所属模块的名称"</span>，例如：targetProject=<span class="string">"ecps-manager-mapper"</span>，下同--&gt;</div><div class="line">        &lt;sqlMapGenerator targetPackage=<span class="string">"mappings"</span></div><div class="line">                         targetProject=<span class="string">"src/main/resources"</span>&gt;</div><div class="line">            &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</div><div class="line">            &lt;property name=<span class="string">"enableSubPackages"</span> value=<span class="string">"false"</span> /&gt;</div><div class="line">        &lt;/sqlMapGenerator&gt;</div><div class="line">        &lt;!-- targetPackage：mapper接口生成的位置 --&gt;</div><div class="line">        &lt;javaClientGenerator type=<span class="string">"XMLMAPPER"</span></div><div class="line">                             targetPackage=<span class="string">"com.xx.dao"</span></div><div class="line">                             targetProject=<span class="string">"src/main/java"</span>&gt;</div><div class="line">            &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</div><div class="line">            &lt;property name=<span class="string">"enableSubPackages"</span> value=<span class="string">"false"</span> /&gt;</div><div class="line">        &lt;/javaClientGenerator&gt;</div><div class="line">        &lt;!-- 指定数据库表 --&gt;</div><div class="line">        &lt;table schema="" tableName="table1"&gt;&lt;/table&gt;</div><div class="line">		&lt;table schema="" tableName="table2"&gt;&lt;/table&gt;</div><div class="line">        </div><div class="line">    &lt;/context&gt;</div><div class="line">&lt;/generatorConfiguration&gt;</div><div class="line">``` </div><div class="line"></div><div class="line">## 2.引入Maven插件</div><div class="line"></div><div class="line">pom文件中build中添加如下插件</div><div class="line">``` java</div><div class="line">	&lt;plugins&gt;</div><div class="line">            &lt;plugin&gt;</div><div class="line">                &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</div><div class="line">                &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</div><div class="line">                &lt;version&gt;1.3.2&lt;/version&gt;</div><div class="line">                &lt;configuration&gt;</div><div class="line">                    &lt;!--配置文件的位置--&gt;      &lt;configurationFile&gt;src/main/resources/generator.xml&lt;/configurationFile&gt;</div><div class="line">                    &lt;verbose&gt;true&lt;/verbose&gt;</div><div class="line">                    &lt;overwrite&gt;true&lt;/overwrite&gt;</div><div class="line">                &lt;/configuration&gt;</div><div class="line">                &lt;executions&gt;</div><div class="line">                    &lt;execution&gt;</div><div class="line">                        &lt;id&gt;Generate MyBatis Artifacts&lt;/id&gt;</div><div class="line">                        &lt;goals&gt;</div><div class="line">                            &lt;goal&gt;generate&lt;/goal&gt;</div><div class="line">                        &lt;/goals&gt;</div><div class="line">                    &lt;/execution&gt;</div><div class="line">                &lt;/executions&gt;</div><div class="line">                &lt;dependencies&gt;</div><div class="line">                    &lt;dependency&gt;</div><div class="line">                        &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</div><div class="line">                        &lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;</div><div class="line">                        &lt;version&gt;1.3.2&lt;/version&gt;</div><div class="line">                    &lt;/dependency&gt;</div><div class="line">                &lt;/dependencies&gt;</div><div class="line">            &lt;/plugin&gt;</div><div class="line">    &lt;/plugins&gt;</div></pre></td></tr></table></figure>
+<h2 id="3-生成代码以及配置文件"><a href="#3-生成代码以及配置文件" class="headerlink" title="3.生成代码以及配置文件"></a>3.生成代码以及配置文件</h2><p>终于到了激动人心的一刻，自动生成代码及配置文件</p>
+<ul>
+<li>Idea中点击右侧导航的 <strong>MavenProjects</strong></li>
+<li>选择你引入插件的工程</li>
+<li>选择Plugins，选择mybatis-generator，双击运行插件就可以生成对应的代码及配置文件。</li>
+</ul>
+
+      
+    </div>
+	
+    
+    
+	
+    
+    
+	<div>
+		
+			
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 欢迎转载分享 ------</div>
+<br/>
+<div style="border: 1px solid black">
+<div style="margin-left:10px">
+<!--<span style="font-weight:blod">版权声明</span>-->
+<!--<img src="/images/user.jpg" >-->
+<br/>
+<p style="font-size: 14px;line-height: 30px">本文由<a href="http://luzhiming.github.io" style="color:#258FC6">marsyi.com</a>创作并维护，欢迎转载分享，欢迎投稿:<a href="mailto:admin@marsyi.com">admin@marsyi.com</a> </br>
+投稿邮件主题请按照如下格式编写<br/>
+<span style="font-size: 18px;line-height: 30px ; color:#222">【投稿-投稿标题-作者】</span>
+<br/>
+</div>
+</div>
+
+		
+	</div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>谢谢捐助,收益将捐赠给需要帮助的人</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="MarsYi.com-码上益 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/随笔/" rel="tag"># 随笔</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/05/SpringCloud/eureka/" rel="next" title="Spring Cloud Eureka">
+                <i class="fa fa-chevron-left"></i> Spring Cloud Eureka
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/wechat_me.jpg"
+                alt="MarsYi.com-码上益" />
+            
+              <p class="site-author-name" itemprop="name">MarsYi.com-码上益</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://gongyi.baidu.com" title="百度公益" target="_blank">百度公益</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#直接进入实战"><span class="nav-number">1.</span> <span class="nav-text">直接进入实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-在maven工程的resources目录下建立一个generator-xml-并做如下配置"><span class="nav-number">1.1.</span> <span class="nav-text">1.在maven工程的resources目录下建立一个generator.xml,并做如下配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-生成代码以及配置文件"><span class="nav-number">1.2.</span> <span class="nav-text">3.生成代码以及配置文件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MarsYi.com</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

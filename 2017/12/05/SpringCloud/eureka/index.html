@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="MarsYi.com-码上益">
 <meta property="og:description" content="本文主要简单介绍了Eureka、Feign、Ribbon、Hystrix的简要使用，欢迎大家阅读。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-06T10:43:49.754Z">
+<meta property="og:updated_time" content="2017-12-14T04:54:40.480Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Cloud Eureka">
 <meta name="twitter:description" content="本文主要简单介绍了Eureka、Feign、Ribbon、Hystrix的简要使用，欢迎大家阅读。">
@@ -312,9 +312,9 @@
 <h1 id="Spring-Cloud-Eureka"><a href="#Spring-Cloud-Eureka" class="headerlink" title="Spring Cloud Eureka"></a>Spring Cloud Eureka</h1><h2 id="基本原理讲解"><a href="#基本原理讲解" class="headerlink" title="基本原理讲解"></a>基本原理讲解</h2><p><strong>服务注册与发现</strong><br>服务注册与发现包含两个部分，分别是:</p>
 <ul>
 <li><strong>服务注册</strong> 将某些服务<strong>注册</strong>到<strong>服务注册中心</strong></li>
-<li><strong>服务发现</strong> 在<strong>服务注册中心</strong>寻找发现某些服务</li>
+<li><strong>服务发现</strong> 在<strong>服务注册中心</strong>获取[注册到服务注册中心的服务]的相关信息，比如服务实例的IP，端口等</li>
 </ul>
-<p><strong>服务注册中心</strong><br>可以接收服务的注册，并且接收对与服务的查询（比如:A要调用B服务，A需要到服务注册中心去寻找是否有B服务）。并且还需要有其他的一些功能，比如:监测服务的健康状态，服务的管理等。Spring Cloud支持如下几种方式的服务注册中心。</p>
+<p><strong>服务注册中心</strong><br>可以接收服务的注册，并且接收对服务的查询（比如:A要调用B服务，A需要到服务注册中心去寻找是否有B服务）。并且还需要有其他的一些功能，比如:监测服务的健康状态，服务的管理等。Spring Cloud支持如下几种方式的服务注册中心。</p>
 <ul>
 <li>Consul</li>
 <li>Zookeeper</li>
@@ -323,8 +323,8 @@
 <p>我们主要讲一下<strong>Eureka</strong><br><strong>基本原理</strong></p>
 <ul>
 <li>服务都会注册到Eureka注册表</li>
-<li>通过心跳机制，自动检测服务，故障时自动从注册表中摘除</li>
-<li>每个服务也可以基于本地注册表缓存，与其他服务进行通信，即Eureka Server挂掉之后不影响通信。只是不能更新服务而已。</li>
+<li>通过心跳机制，自动检测服务，服务故障时自动从注册表中摘除</li>
+<li>每个服务的调用方(服务消费者)也可以基于本地注册表缓存，与其他服务进行通信，即Eureka Server挂掉之后不影响服务间通信。只是不能更新服务而已。</li>
 </ul>
 <h2 id="来一波实战"><a href="#来一波实战" class="headerlink" title="来一波实战"></a>来一波实战</h2><h3 id="单机版Eureka-Server"><a href="#单机版Eureka-Server" class="headerlink" title="单机版Eureka Server"></a>单机版Eureka Server</h3><ul>
 <li><p>新创建一个Spring Boot 应用 添加如下依赖 </p>
@@ -339,7 +339,8 @@
 <li><p>启动程序，访问演示<a href="http://127.0.0.1:9001" target="_blank" rel="external">http://127.0.0.1:9001</a></p>
 </li>
 </ul>
-<h3 id="高可用集群"><a href="#高可用集群" class="headerlink" title="高可用集群"></a>高可用集群</h3><p>其他的配置以及依赖几乎一样，只是需要在配置项想有一些修改<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">application-dev.propertiesserver.port=<span class="number">80</span></div><div class="line"># 配置当前EurekaServer的hostname</div><div class="line">eureka.instance.hostname=test1.xx.com</div><div class="line"># 配置多个EurekaServer的地址，用英文","隔开</div><div class="line">eureka.client.service-url.defaultZone=http:<span class="comment">//test2.xx.com/eureka,http://test3.xx.com/eureka</span></div><div class="line">eureka.client.register-with-eureka=<span class="keyword">false</span></div><div class="line">eureka.client.fetch-registry=<span class="keyword">false</span></div></pre></td></tr></table></figure></p>
+<h3 id="高可用集群"><a href="#高可用集群" class="headerlink" title="高可用集群"></a>高可用集群</h3><p>由于单点的情况是非高可用的，万一注册中心挂了，就不能更新服务，以及对服务的检测<br>其他的配置以及依赖几乎一样，只是需要在eureka.client.service-url.defaultZone配置多个注册中心，两两形成闭环<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">application-dev.propertiesserver.port=<span class="number">80</span></div><div class="line"># 配置当前EurekaServer的hostname</div><div class="line">eureka.instance.hostname=test1.xx.com</div><div class="line"># 配置多个EurekaServer的地址，用英文","隔开</div><div class="line">eureka.client.service-url.defaultZone=http:<span class="comment">//test2.xx.com/eureka,http://test3.xx.com/eureka</span></div><div class="line">eureka.client.register-with-eureka=<span class="keyword">false</span></div><div class="line">eureka.client.fetch-registry=<span class="keyword">false</span></div></pre></td></tr></table></figure></p>
+<p>例如:A,B,C三个服务注册中心<br>A：注册到B和C<br>B：注册到A和C<br>C：注册到A和B</p>
 <h3 id="服务注册-服务提供方"><a href="#服务注册-服务提供方" class="headerlink" title="服务注册(服务提供方)"></a>服务注册(服务提供方)</h3><ul>
 <li>新建一个Spring Boot 应用</li>
 <li><p>添加如下依赖</p>
@@ -558,7 +559,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -580,7 +581,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

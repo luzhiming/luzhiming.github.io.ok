@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="设计模式," />
+  <meta name="keywords" content="Netty," />
 
 
 
@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="作者:鲁志明 主题:设计模式-策略模式策略模式也是常用设计模式中比较重要的一个设计模式，本本文对策略模式做了详细的介绍。包括 概念的讲解，生活中的例子类比，UML画图讲解，以及Java代码实现，欢迎大家观看">
-<meta name="keywords" content="设计模式">
+<meta name="description" content="Netty宏观的一个小小的总结以及学习经验，欢迎大家阅读">
+<meta name="keywords" content="Netty">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式-策略模式">
-<meta property="og:url" content="http://luzhiming.github.io/2017/10/21/视频教程/设计模式/策略模式/index.html">
+<meta property="og:title" content="Netty宏观总结">
+<meta property="og:url" content="http://luzhiming.github.io/2017/12/21/Netty/3.Netty宏观总结/index.html">
 <meta property="og:site_name" content="MarsYi.com-码上益">
-<meta property="og:description" content="作者:鲁志明 主题:设计模式-策略模式策略模式也是常用设计模式中比较重要的一个设计模式，本本文对策略模式做了详细的介绍。包括 概念的讲解，生活中的例子类比，UML画图讲解，以及Java代码实现，欢迎大家观看">
+<meta property="og:description" content="Netty宏观的一个小小的总结以及学习经验，欢迎大家阅读">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-21T08:44:02.319Z">
+<meta property="og:updated_time" content="2017-12-21T03:06:31.440Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式-策略模式">
-<meta name="twitter:description" content="作者:鲁志明 主题:设计模式-策略模式策略模式也是常用设计模式中比较重要的一个设计模式，本本文对策略模式做了详细的介绍。包括 概念的讲解，生活中的例子类比，UML画图讲解，以及Java代码实现，欢迎大家观看">
+<meta name="twitter:title" content="Netty宏观总结">
+<meta name="twitter:description" content="Netty宏观的一个小小的总结以及学习经验，欢迎大家阅读">
 
 
 
@@ -114,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="http://luzhiming.github.io/2017/10/21/视频教程/设计模式/策略模式/"/>
+  <link rel="canonical" href="http://luzhiming.github.io/2017/12/21/Netty/3.Netty宏观总结/"/>
 
 
 
 
 
-  <title>设计模式-策略模式 | MarsYi.com-码上益</title>
+  <title>Netty宏观总结 | MarsYi.com-码上益</title>
   
 
 
@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://luzhiming.github.io/2017/10/21/视频教程/设计模式/策略模式/">
+    <link itemprop="mainEntityOfPage" href="http://luzhiming.github.io/2017/12/21/Netty/3.Netty宏观总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarsYi.com-码上益">
@@ -258,7 +258,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">设计模式-策略模式</h2>
+          <h2 class="post-title" itemprop="name headline">Netty宏观总结</h2>
         
 
         <div class="post-meta">
@@ -270,8 +270,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-21T16:05:38+08:00">
-                2017-10-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T09:25:18+08:00">
+                2017-12-21
               </time>
             
 
@@ -280,39 +280,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/视频教程/" itemprop="url" rel="index">
-                    <span itemprop="name">视频教程</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/视频教程/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -341,13 +308,22 @@
       
 
       
-        <h2 id="作者-鲁志明-主题-设计模式-策略模式"><a href="#作者-鲁志明-主题-设计模式-策略模式" class="headerlink" title="作者:鲁志明 主题:设计模式-策略模式"></a>作者:鲁志明 主题:设计模式-策略模式</h2><p>策略模式也是常用设计模式中比较重要的一个设计模式，本本文对策略模式做了详细的介绍。包括 概念的讲解，生活中的例子类比，UML画图讲解，以及Java代码实现，欢迎大家观看<br><a id="more"></a></p>
-<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><p><strong><a href="https://raw.githubusercontent.com/luzhiming/designpattern_video/master/2.stragety/2.stragety.mp4" target="_blank" rel="external">视频下载</a></strong><br><strong><a href="https://github.com/luzhiming/designpattern/tree/master/src/main/java/strategy" target="_blank" rel="external">源码</a></strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">概念:对一系列算法的封装，使得他们可相互互换</div><div class="line">角色:抽象策略角色，具体策略角色，环境角色</div><div class="line">例子类比:多色圆珠笔[抽象策略角色-笔芯，具体策略角色-不同颜色的笔芯，环境角色-笔套]</div></pre></td></tr></table></figure></p>
-<h3 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h3><h4 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h4><p><image src="https://raw.githubusercontent.com/luzhiming/designpattern_video/master/2.stragety/strategy.png"></image></p>
-<h4 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h4><p><image src="https://raw.githubusercontent.com/luzhiming/designpattern_video/master/2.stragety/stragety_seq.png"></image></p>
-<h3 id="在线观看"><a href="#在线观看" class="headerlink" title="在线观看"></a>在线观看</h3><video src="https://raw.githubusercontent.com/luzhiming/designpattern_video/master/2.stragety/2.stragety.mp4" height="600" width="800" controls="controls">
+        <p>Netty宏观的一个小小的总结以及学习经验，欢迎大家阅读</p>
+<a id="more"></a>
+<h1 id="关于Futre"><a href="#关于Futre" class="headerlink" title="关于Futre"></a>关于Futre</h1><p>JDK提供的Future只能通过手工方式检查执行结果，而这个操作是会阻塞的；<br>Netty则对ChannelFuture进行了增强，通过ChannelFutureListener以回调的方式来获取执行结果，去除了手工检查阻塞的操作；<br>值得注意的是:ChannelFutureListener的OperationComplete方法是由I/O线程执行的，因此要注意的是不要在Listener执行耗时的操作，而是要通过另外的线程或者线程池来操作。<br>注意：Listener接收的参数是Future，也就是当前future对象，也就是说明，在listener中可以通过判断Future.isSuccess等来做业务逻辑</p>
+<h1 id="Netty中涉及到的经典设计模式"><a href="#Netty中涉及到的经典设计模式" class="headerlink" title="Netty中涉及到的经典设计模式"></a>Netty中涉及到的经典设计模式</h1><h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2><p>Future的Listerner</p>
+<h2 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h2><p>ChannelHandlerAdapter<br>ChannelInboudHandlerAdapter</p>
+<h2 id="模版方法模式-SimpleChannelInboudHandler-与-ChannelInboudHandlerAdapter的区别"><a href="#模版方法模式-SimpleChannelInboudHandler-与-ChannelInboudHandlerAdapter的区别" class="headerlink" title="模版方法模式 SimpleChannelInboudHandler 与 ChannelInboudHandlerAdapter的区别"></a>模版方法模式 SimpleChannelInboudHandler 与 ChannelInboudHandlerAdapter的区别</h2><p>SimpleChannelInboudHandler.channelRead() - 模版方法，帮我们自动调用了RefereanceCountUtil.release(),自动帮我们释放资源。<br>也就是说客户端发过来的信息，我们用完之后就会被释放，如果我们直接将收到的消息再发送回客户端，那么有可能会发送失败，<br>因为这时候资源已经释放了。<br><strong>所以正确的做法是要么继承ChannelInboudHandlerAdapter直接发送收到的消息。或者继承SimpleChannelInboudHandler的同时，new一个新的消息发送回客户端。<br>channelRead0() - 我们自己实现</strong><br>ReferenceCounted 说明，引用的容器里面包含对象，但是当容器的引用基数为0的时候，容器里面的对象都会被释放掉</p>
+<h2 id="关于入栈"><a href="#关于入栈" class="headerlink" title="关于入栈:"></a>关于入栈:</h2><p>ChannnelInboudHandler.channelRead会被调用多次，channelReadComplete调用完成之后标识read完成</p>
+<h2 id="常见重要事项分析"><a href="#常见重要事项分析" class="headerlink" title="常见重要事项分析"></a>常见重要事项分析</h2><p>1.在Netty中有两种发送消息的方式，可以直接写到Channel中，也可以写到与ChannelHandler所关联的那个ChannelHandlerContext中。</p>
+<p>ctx.channel.writeAndFlush:<br>从channle的最后一个Handler开始出栈，最后抵达目标。即channel的方法一般都是从调用链最后一个Handler出栈。</p>
+<p>ctx.writeAndFlush:从当前所调用的Handler的下一个开始出栈，最后抵达目标。相当于一个短路操作<br>的关键区别</p>
+<p>所以结论如下:<br>    1.ChannelHandlerContext与ChannelHandler之间的关联绑定关系是永远都不会发生改变的，因此对其进行缓存是没有任何问题的<br>    2.对于与Channel的同名方法来说，ChannelHandlerContext将会产生更短的事件流，所以我们应该在可能的情况下利用这个特性来提升应用的性能</p>
+<p>2.Netty如何支持Oio(Bio) 以及Nio的同时保持API一致的<br>对于Netty这种全异步的框架对于同步的支持:<br>是利用超时机制。比如每次读取5秒钟，因为5秒可能没读完，然后超时，然后捕获超时异常，然后下次再接着读，这样就实现了同步读。<br>我们可以总结:<br>当连接不多的情况下，我们可以使用Oio，一个线程一个channel。传输效率更高。<br>当连接非常多的情况下(超出了cpu核*2)的情况下，还是需要Nio的，即一个线程管理多个channel，这样可以在资源有限的情况下管理更多的channel。</p>
+<p>3.针对如下场景<br>C:客户端<br>S1:服务器端<br>S2:服务器端2<br>方式1:<br>C-&gt;S1-&gt;S2 游戏服务器场景下<br>应该是<br>C连接S1,然后需要正式的长期额与S2进行通信的情况下(比如游戏的房间) 让C连接S2.而不是让S1作为中转服务</p>
+<p>方式2：<br>也有中转的方式:两个channel重用同一个eventloop,一个channel是C与S1的channel ， 另一个channel是S1与S2的channel<br>S1<br>public void channelActive(ChannelHandlerContext ctx){<br>    Boostrap bootstrap = ..<br>    bootstrap.channel(NioSocketChannel.class).handler(<br>        bootstrap.group(ctx.channel().eventLoop());<br>        bootstrap.connect(S2);<br>    )<br>}</p>
+<p>参考资料:<br><a href="http://iprogramming.cn" target="_blank" rel="external">张龙老师授课资料</a></p>
 
-</video>
       
     </div>
 	
@@ -414,7 +390,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+            <a href="/tags/Netty/" rel="tag"># Netty</a>
           
         </div>
       
@@ -442,8 +418,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/15/视频教程/设计模式/4.命令模式/" rel="next" title="设计模式-命令模式">
-                <i class="fa fa-chevron-left"></i> 设计模式-命令模式
+              <a href="/2017/12/19/Netty/2.Netty线程线程架构/" rel="next" title="Netty线程架构分析">
+                <i class="fa fa-chevron-left"></i> Netty线程架构分析
               </a>
             
           </div>
@@ -452,8 +428,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/05/SpringCloud/eureka/" rel="prev" title="Spring Cloud Eureka">
-                Spring Cloud Eureka <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/21/JavaNio/1.Java NIO中，关于DirectBuffer，HeapBuffer的疑问【转】/" rel="prev" title="Netty宏观总结">
+                Netty宏观总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -606,7 +582,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作者-鲁志明-主题-设计模式-策略模式"><span class="nav-number">1.</span> <span class="nav-text">作者:鲁志明 主题:设计模式-策略模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点"><span class="nav-number">1.1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UML"><span class="nav-number">1.2.</span> <span class="nav-text">UML</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类图"><span class="nav-number">1.2.1.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时序图"><span class="nav-number">1.2.2.</span> <span class="nav-text">时序图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在线观看"><span class="nav-number">1.3.</span> <span class="nav-text">在线观看</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于Futre"><span class="nav-number">1.</span> <span class="nav-text">关于Futre</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty中涉及到的经典设计模式"><span class="nav-number">2.</span> <span class="nav-text">Netty中涉及到的经典设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#观察者模式"><span class="nav-number">2.1.</span> <span class="nav-text">观察者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适配器模式"><span class="nav-number">2.2.</span> <span class="nav-text">适配器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模版方法模式-SimpleChannelInboudHandler-与-ChannelInboudHandlerAdapter的区别"><span class="nav-number">2.3.</span> <span class="nav-text">模版方法模式 SimpleChannelInboudHandler 与 ChannelInboudHandlerAdapter的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于入栈"><span class="nav-number">2.4.</span> <span class="nav-text">关于入栈:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见重要事项分析"><span class="nav-number">2.5.</span> <span class="nav-text">常见重要事项分析</span></a></li></ol></li></ol></div>
             
 
           </div>

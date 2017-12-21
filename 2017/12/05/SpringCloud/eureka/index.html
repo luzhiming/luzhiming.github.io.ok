@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="MarsYi.com-码上益">
 <meta property="og:description" content="本文主要简单介绍了Eureka、Feign、Ribbon、Hystrix的简要使用，欢迎大家阅读。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-14T04:54:40.480Z">
+<meta property="og:updated_time" content="2017-12-21T04:43:46.770Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Cloud Eureka">
 <meta name="twitter:description" content="本文主要简单介绍了Eureka、Feign、Ribbon、Hystrix的简要使用，欢迎大家阅读。">
@@ -339,7 +339,7 @@
 <li><p>启动程序，访问演示<a href="http://127.0.0.1:9001" target="_blank" rel="external">http://127.0.0.1:9001</a></p>
 </li>
 </ul>
-<h3 id="高可用集群"><a href="#高可用集群" class="headerlink" title="高可用集群"></a>高可用集群</h3><p>由于单点的情况是非高可用的，万一注册中心挂了，就不能更新服务，以及对服务的检测<br>其他的配置以及依赖几乎一样，只是需要在eureka.client.service-url.defaultZone配置多个注册中心，两两形成闭环<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">application-dev.propertiesserver.port=<span class="number">80</span></div><div class="line"># 配置当前EurekaServer的hostname</div><div class="line">eureka.instance.hostname=test1.xx.com</div><div class="line"># 配置多个EurekaServer的地址，用英文","隔开</div><div class="line">eureka.client.service-url.defaultZone=http:<span class="comment">//test2.xx.com/eureka,http://test3.xx.com/eureka</span></div><div class="line">eureka.client.register-with-eureka=<span class="keyword">false</span></div><div class="line">eureka.client.fetch-registry=<span class="keyword">false</span></div></pre></td></tr></table></figure></p>
+<h3 id="高可用集群"><a href="#高可用集群" class="headerlink" title="高可用集群"></a>高可用集群</h3><p>由于单点的情况是非高可用的，万一注册中心挂了，就不能更新服务，以及对服务的检测<br>其他的配置以及依赖几乎一样，只是需要在eureka.client.service-url.defaultZone配置多个注册中心，两两形成闭环<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">application-dev.propertiesserver.port=<span class="number">80</span></div><div class="line"># 配置当前EurekaServer的hostname</div><div class="line">eureka.instance.hostname=test1.xx.com</div><div class="line"># 配置多个EurekaServer的地址，用英文","隔开</div><div class="line">eureka.client.service-url.defaultZone=http:<span class="comment">//test2.xx.com/eureka,http://test3.xx.com/eureka</span></div><div class="line"># 将自己注册到服务注册中心</div><div class="line">eureka.client.register-with-eureka=<span class="keyword">true</span></div><div class="line"># 从Eureka服务器获取注册的服务的信息</div><div class="line">eureka.client.fetch-registry=<span class="keyword">true</span></div></pre></td></tr></table></figure></p>
 <p>例如:A,B,C三个服务注册中心<br>A：注册到B和C<br>B：注册到A和C<br>C：注册到A和B</p>
 <h3 id="服务注册-服务提供方"><a href="#服务注册-服务提供方" class="headerlink" title="服务注册(服务提供方)"></a>服务注册(服务提供方)</h3><ul>
 <li>新建一个Spring Boot 应用</li>

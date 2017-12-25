@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="码上益, 鲁志明, marsyi.com, 18311276689" />
+  <meta name="keywords" content="Netty,ByteBuf," />
 
 
 
@@ -73,17 +73,18 @@
 
 
 
-<meta name="description" content="本文记录了如何利用github+hexo搭建一个个人网页的过程。适合初学者从头开始搭建一个属于自己的博客。">
+<meta name="description" content="Netty-ByteBuf的较为详细的介绍，欢迎大家阅读并指正。">
+<meta name="keywords" content="Netty,ByteBuf">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何利用github+hexo搭建一个个人网页">
-<meta property="og:url" content="http://luzhiming.github.io/2017/10/09/随笔/如何利用github+hexo搭建一个个人网页/index.html">
+<meta property="og:title" content="Netty-ByteBuf">
+<meta property="og:url" content="http://luzhiming.github.io/2017/12/21/Netty/4.Netty-ByteBuf/index.html">
 <meta property="og:site_name" content="MarsYi.com-码上益">
-<meta property="og:description" content="本文记录了如何利用github+hexo搭建一个个人网页的过程。适合初学者从头开始搭建一个属于自己的博客。">
+<meta property="og:description" content="Netty-ByteBuf的较为详细的介绍，欢迎大家阅读并指正。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-09T12:53:07.738Z">
+<meta property="og:updated_time" content="2017-12-25T01:35:05.383Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何利用github+hexo搭建一个个人网页">
-<meta name="twitter:description" content="本文记录了如何利用github+hexo搭建一个个人网页的过程。适合初学者从头开始搭建一个属于自己的博客。">
+<meta name="twitter:title" content="Netty-ByteBuf">
+<meta name="twitter:description" content="Netty-ByteBuf的较为详细的介绍，欢迎大家阅读并指正。">
 
 
 
@@ -113,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="http://luzhiming.github.io/2017/10/09/随笔/如何利用github+hexo搭建一个个人网页/"/>
+  <link rel="canonical" href="http://luzhiming.github.io/2017/12/21/Netty/4.Netty-ByteBuf/"/>
 
 
 
 
 
-  <title>如何利用github+hexo搭建一个个人网页 | MarsYi.com-码上益</title>
+  <title>Netty-ByteBuf | MarsYi.com-码上益</title>
   
 
 
@@ -240,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://luzhiming.github.io/2017/10/09/随笔/如何利用github+hexo搭建一个个人网页/">
+    <link itemprop="mainEntityOfPage" href="http://luzhiming.github.io/2017/12/21/Netty/4.Netty-ByteBuf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarsYi.com-码上益">
@@ -257,7 +258,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">如何利用github+hexo搭建一个个人网页</h2>
+          <h2 class="post-title" itemprop="name headline">Netty-ByteBuf</h2>
         
 
         <div class="post-meta">
@@ -269,8 +270,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-09T13:23:13+08:00">
-                2017-10-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T09:25:18+08:00">
+                2017-12-21
               </time>
             
 
@@ -279,28 +280,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -329,20 +308,37 @@
       
 
       
-        <p>本文记录了如何利用github+hexo搭建一个个人网页的过程。适合初学者从头开始搭建一个属于自己的博客。<br><a id="more"></a></p>
-<h2 id="基础准备"><a href="#基础准备" class="headerlink" title="基础准备"></a>基础准备</h2><h3 id="github的准备"><a href="#github的准备" class="headerlink" title="github的准备"></a>github的准备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">拥有一个github帐号</div><div class="line">创建一个仓库，仓库的名字是:github用户名.github.io</div></pre></td></tr></table></figure>
-<h3 id="购买独立域名"><a href="#购买独立域名" class="headerlink" title="购买独立域名"></a>购买独立域名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">万网申请独立域名</div><div class="line">ping github用户名.github.io 获得ip地址如:xxx.xxx.xxx.xxx</div><div class="line">域名做cname解析到上一步获得的ip</div></pre></td></tr></table></figure>
-<h3 id="github仓库传CNAME文件"><a href="#github仓库传CNAME文件" class="headerlink" title="github仓库传CNAME文件"></a>github仓库传CNAME文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git仓库中建立CNAME文件,文件内容为:第二步购买的域名</div></pre></td></tr></table></figure>
-<h2 id="安装HEXO"><a href="#安装HEXO" class="headerlink" title="安装HEXO"></a>安装HEXO</h2><h3 id="安装NodeJs"><a href="#安装NodeJs" class="headerlink" title="安装NodeJs"></a>安装NodeJs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">由于Hexo是基于nodeJs环境的静态博客，npm工具非常有用，所以我们需要安装nodejs,去官网下载最新版本按照即可</div></pre></td></tr></table></figure>
-<h3 id="安装hexo-执行如下命令"><a href="#安装hexo-执行如下命令" class="headerlink" title="安装hexo,执行如下命令"></a>安装hexo,执行如下命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i -g hexo</div></pre></td></tr></table></figure>
-<h3 id="新建一个文件"><a href="#新建一个文件" class="headerlink" title="新建一个文件"></a>新建一个文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<h3 id="先清理hexo缓存"><a href="#先清理hexo缓存" class="headerlink" title="先清理hexo缓存"></a>先清理hexo缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div></pre></td></tr></table></figure>
-<h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<h3 id="启动服务，访问localhost-4000"><a href="#启动服务，访问localhost-4000" class="headerlink" title="启动服务，访问localhost:4000"></a>启动服务，访问localhost:4000</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<h3 id="部署到git服务器"><a href="#部署到git服务器" class="headerlink" title="部署到git服务器"></a>部署到git服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">首先需要在hexo的_config.yml中配置选项</div><div class="line">使用:hexo deploy 发布</div></pre></td></tr></table></figure>
-<h2 id="关于主题"><a href="#关于主题" class="headerlink" title="关于主题"></a>关于主题</h2><p>hexo支持主题，目前也有非常多优秀的主题给大家用</p>
-<h3 id="下载yilia主题"><a href="#下载yilia主题" class="headerlink" title="下载yilia主题"></a>下载yilia主题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">clone</span> https://github.com/litten/hexo-theme-yilia.git themes/yilia</div></pre></td></tr></table></figure>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ 修改hexo的_config.yml 的theme属性为yilia</div></pre></td></tr></table></figure>
+        <p>Netty-ByteBuf的较为详细的介绍，欢迎大家阅读并指正。</p>
+<a id="more"></a>
+<h1 id="传统Java-Buffer-文件读写的一般步骤"><a href="#传统Java-Buffer-文件读写的一般步骤" class="headerlink" title="传统Java Buffer 文件读写的一般步骤"></a>传统Java Buffer 文件读写的一般步骤</h1><ul>
+<li>从FileInputStream对象中获取到Channel对象</li>
+<li>创建Buffer</li>
+<li>将数据从Channel中读取到Buufer对象中<h1 id="ByteBuf-分析"><a href="#ByteBuf-分析" class="headerlink" title="ByteBuf 分析"></a>ByteBuf 分析</h1></li>
+<li>提供两个指针分别表示读和写分别是readerIndex,writerIndex.而java的ByteBuffer只用position来表示当前读或者写的位置</li>
+<li>针对Java的ByteBuffer而且不用调用flip直接读写就OK了</li>
+<li>BteBuf可以自动扩容(当然后拷贝)<h1 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构:"></a>索引结构:</h1>0-被抛弃的字节-readerIndex-可读的字节-writerIndex-可写的字节-capacity<br>discard：抛弃0-readerIndex,之后的字节会被拷贝到前面来，存在一个字节复制的过程，消耗资源，一般情况不要调用该方法<br>duplicate: 轻度复制，复制的是readerIndex和writerIndex,底层共享同一份数据<br>copy: 深度拷贝，复制了索引和数据<br>clear: 将readerIndex与writerIndex统一修改为0</li>
+</ul>
+<h1 id="Netty-ByteBuf的3种"><a href="#Netty-ByteBuf的3种" class="headerlink" title="Netty ByteBuf的3种"></a>Netty ByteBuf的3种</h1><h2 id="1-heap-buffer-堆上的缓存（对于后端的业务编解码来说，推荐使用HeapBytebuffer，如我们自己编写的Handler做业务逻辑的时候）"><a href="#1-heap-buffer-堆上的缓存（对于后端的业务编解码来说，推荐使用HeapBytebuffer，如我们自己编写的Handler做业务逻辑的时候）" class="headerlink" title="1.heap buffer - 堆上的缓存（对于后端的业务编解码来说，推荐使用HeapBytebuffer，如我们自己编写的Handler做业务逻辑的时候）"></a>1.heap buffer - 堆上的缓存（<strong>对于后端的业务编解码来说，推荐使用HeapBytebuffer，如我们自己编写的Handler做业务逻辑的时候</strong>）</h2><p>这是最常用类型，ByteBuf将数据存储到JVM堆空间中，并且将实际的数据存放到byte array中 称之为backing byte arry<br>优点: 由于数据是存储在JVM堆中，所以可以快速创建与快速释放，并且提供了直接访问内部字节数组的方法<br>缺点: 每次读写数据时，都需要先将数据 <strong>复制到直接缓冲区在进行网络传输。</strong></p>
+<ol>
+<li><h3 id="池化的"><a href="#池化的" class="headerlink" title="池化的"></a>池化的</h3></li>
+<li><h3 id="非池化的"><a href="#非池化的" class="headerlink" title="非池化的"></a>非池化的</h3></li>
+</ol>
+<h2 id="2-direct-buffer-直接缓冲区-（对于I-O通信线程在读写缓冲区的时候，推进使用DirectByteBuf-这样减少了一次拷贝，即0拷贝）"><a href="#2-direct-buffer-直接缓冲区-（对于I-O通信线程在读写缓冲区的时候，推进使用DirectByteBuf-这样减少了一次拷贝，即0拷贝）" class="headerlink" title="2.direct buffer - 直接缓冲区 （对于I/O通信线程在读写缓冲区的时候，推进使用DirectByteBuf,这样减少了一次拷贝，即0拷贝）"></a>2.direct buffer - 直接缓冲区 （<strong>对于I/O通信线程在读写缓冲区的时候，推进使用DirectByteBuf,这样减少了一次拷贝，即0拷贝</strong>）</h2><p>在堆之外直接分配内存空间，直接缓冲区并不会占用堆的容量空间，因为他是由操作系统在本地内存进行的分配。<br>优点: 在使用Socket进行网络传输时，性能非常好，因为数据直接位于操作系统本地的内存中，所以不需要从JVM复制到直接缓冲区中，减少了一次复制。性能很好。<strong>0拷贝</strong><br>缺点: 因为是直接在操作系统内存中的，所以内存空间的分配与释放要比堆空间更加复杂，而且速度要慢一些。<strong>Netty通过内存池来解决这个问题</strong>，另外，<strong>直接缓冲区不支持通过数组的方式访问数据</strong></p>
+<ol>
+<li><h3 id="池化的-1"><a href="#池化的-1" class="headerlink" title="池化的"></a>池化的</h3></li>
+<li><h3 id="非池化的-1"><a href="#非池化的-1" class="headerlink" title="非池化的"></a>非池化的</h3></li>
+</ol>
+<h2 id="3-composite-buffer-复合缓冲区-含了其他Buffer的Buffer-（-）"><a href="#3-composite-buffer-复合缓冲区-含了其他Buffer的Buffer-（-）" class="headerlink" title="3.composite buffer - 复合缓冲区 - 含了其他Buffer的Buffer （**）"></a>3.composite buffer - 复合缓冲区 - 含了其他Buffer的Buffer （<em>**</em>）</h2><p>这是一种虚拟的缓冲区，是一个缓冲区列表。可以存放heap buffer 也可以存放 direct buffer<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CompositeByteBuf byteBufs = Unpooled.compositeBuffer();</div><div class="line">      ByteBuf heapBuffer = Unpooled.buffer();</div><div class="line">      ByteBuf directByteBuf = Unpooled.directBuffer();</div><div class="line">      byteBufs.addComponents(heapBuffer,directByteBuf);</div></pre></td></tr></table></figure></p>
+<h1 id="Netty的ByteBuf-和-Java-ByteBuffer的对比"><a href="#Netty的ByteBuf-和-Java-ByteBuffer的对比" class="headerlink" title="Netty的ByteBuf 和 Java ByteBuffer的对比"></a>Netty的ByteBuf 和 Java ByteBuffer的对比</h1><ol>
+<li>Netty的ByteBuf采用了读写索引分离的策略，分别提供了readerIndex和writerIndex,一个初始化的ByteBuf他的readerIndex和writerIndex都是0.</li>
+<li>当读索引与写索引处于同一个位置时，如果我们继续读取那就会抛出<strong>IndexOutofBoudsException</strong></li>
+<li>对于ByteBuf的任何读写操作，都会分别单独维护读索引与写索引。</li>
+<li>Netty的ByteBuf自动扩容，maxCapacity最大容量是Indeger.MAX_VALUE<h2 id="自动扩容-内存拷贝"><a href="#自动扩容-内存拷贝" class="headerlink" title="自动扩容-内存拷贝"></a>自动扩容-内存拷贝</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">memoryCopy</span><span class="params">(<span class="keyword">byte</span>[] src, <span class="keyword">int</span> srcOffset, <span class="keyword">byte</span>[] dst, <span class="keyword">int</span> dstOffset, <span class="keyword">int</span> length)</span> </span>&#123;</div><div class="line">          <span class="keyword">if</span> (length == <span class="number">0</span>) &#123;</div><div class="line">              <span class="keyword">return</span>;</div><div class="line">          &#125;</div><div class="line">          System.arraycopy(src, srcOffset, dst, dstOffset, length);</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>读写的相对与绝对方法:即通过索引来访问Byte的时并不会改版真实的读索引与写索引；我们可以通过ByteBuf的readeXX和writeXX方法分别直接修改读索引与写索引<br>buffer.writeByte(value) //相对方法，writerIndex会+1<br>buffer.getByte(value) //绝对方法，readIndex不会+1<br>buffer.readByte() // 相对方法，readerIndex会+1</p>
+<p>hasArray()<br>true：表示是堆上的，堆上的是通过byte 数组来维护的<br>false：表示是直接缓冲</p>
+<p>//作业<br>符合缓冲区<br>引用计数器<br>比较与传统ByteBuffer的区别</p>
 
       
     </div>
@@ -408,6 +404,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Netty/" rel="tag"># Netty</a>
+          
+            <a href="/tags/ByteBuf/" rel="tag"># ByteBuf</a>
+          
+        </div>
+      
 
       
       
@@ -432,14 +436,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/12/19/Netty/2.Netty线程线程架构/" rel="next" title="Netty线程架构分析">
+                <i class="fa fa-chevron-left"></i> Netty线程架构分析
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/10/视频教程/设计模式/单例模式/" rel="prev" title="设计模式-单例模式">
-                设计模式-单例模式 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/21/JavaNio/1.Java NIO中，关于DirectBuffer，HeapBuffer的疑问【转】/" rel="prev" title="Netty宏观总结">
+                Netty宏观总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -592,7 +600,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础准备"><span class="nav-number">1.</span> <span class="nav-text">基础准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#github的准备"><span class="nav-number">1.1.</span> <span class="nav-text">github的准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#购买独立域名"><span class="nav-number">1.2.</span> <span class="nav-text">购买独立域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#github仓库传CNAME文件"><span class="nav-number">1.3.</span> <span class="nav-text">github仓库传CNAME文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装HEXO"><span class="nav-number">2.</span> <span class="nav-text">安装HEXO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装NodeJs"><span class="nav-number">2.1.</span> <span class="nav-text">安装NodeJs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装hexo-执行如下命令"><span class="nav-number">2.2.</span> <span class="nav-text">安装hexo,执行如下命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建一个文件"><span class="nav-number">2.3.</span> <span class="nav-text">新建一个文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#先清理hexo缓存"><span class="nav-number">2.4.</span> <span class="nav-text">先清理hexo缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成静态文件"><span class="nav-number">2.5.</span> <span class="nav-text">生成静态文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动服务，访问localhost-4000"><span class="nav-number">2.6.</span> <span class="nav-text">启动服务，访问localhost:4000</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署到git服务器"><span class="nav-number">2.7.</span> <span class="nav-text">部署到git服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于主题"><span class="nav-number">3.</span> <span class="nav-text">关于主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载yilia主题"><span class="nav-number">3.1.</span> <span class="nav-text">下载yilia主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">3.2.</span> <span class="nav-text">安装</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#传统Java-Buffer-文件读写的一般步骤"><span class="nav-number">1.</span> <span class="nav-text">传统Java Buffer 文件读写的一般步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ByteBuf-分析"><span class="nav-number">2.</span> <span class="nav-text">ByteBuf 分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引结构"><span class="nav-number">3.</span> <span class="nav-text">索引结构:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty-ByteBuf的3种"><span class="nav-number">4.</span> <span class="nav-text">Netty ByteBuf的3种</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-heap-buffer-堆上的缓存（对于后端的业务编解码来说，推荐使用HeapBytebuffer，如我们自己编写的Handler做业务逻辑的时候）"><span class="nav-number">4.1.</span> <span class="nav-text">1.heap buffer - 堆上的缓存（对于后端的业务编解码来说，推荐使用HeapBytebuffer，如我们自己编写的Handler做业务逻辑的时候）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#池化的"><span class="nav-number">4.1.1.</span> <span class="nav-text">池化的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非池化的"><span class="nav-number">4.1.2.</span> <span class="nav-text">非池化的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-direct-buffer-直接缓冲区-（对于I-O通信线程在读写缓冲区的时候，推进使用DirectByteBuf-这样减少了一次拷贝，即0拷贝）"><span class="nav-number">4.2.</span> <span class="nav-text">2.direct buffer - 直接缓冲区 （对于I/O通信线程在读写缓冲区的时候，推进使用DirectByteBuf,这样减少了一次拷贝，即0拷贝）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#池化的-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">池化的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非池化的-1"><span class="nav-number">4.2.2.</span> <span class="nav-text">非池化的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-composite-buffer-复合缓冲区-含了其他Buffer的Buffer-（-）"><span class="nav-number">4.3.</span> <span class="nav-text">3.composite buffer - 复合缓冲区 - 含了其他Buffer的Buffer （**）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty的ByteBuf-和-Java-ByteBuffer的对比"><span class="nav-number">5.</span> <span class="nav-text">Netty的ByteBuf 和 Java ByteBuffer的对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自动扩容-内存拷贝"><span class="nav-number">5.1.</span> <span class="nav-text">自动扩容-内存拷贝</span></a></li></ol></li></ol></div>
             
 
           </div>

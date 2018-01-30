@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="设计模式," />
+  <meta name="keywords" content="Netty,ByteBuf," />
 
 
 
@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="单例模式模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。">
-<meta name="keywords" content="设计模式">
+<meta name="description" content="Netty-编解码">
+<meta name="keywords" content="Netty,ByteBuf">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式-单例模式">
-<meta property="og:url" content="http://luzhiming.github.io/2017/10/10/视频教程/设计模式/单例模式/index.html">
+<meta property="og:title" content="Netty-编解码">
+<meta property="og:url" content="http://luzhiming.github.io/2018/01/19/Netty/6.Netty-编码解码/index.html">
 <meta property="og:site_name" content="MarsYi.com-码上益">
-<meta property="og:description" content="单例模式模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。">
+<meta property="og:description" content="Netty-编解码">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-10T05:16:21.097Z">
+<meta property="og:updated_time" content="2018-01-24T08:25:48.255Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式-单例模式">
-<meta name="twitter:description" content="单例模式模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。">
+<meta name="twitter:title" content="Netty-编解码">
+<meta name="twitter:description" content="Netty-编解码">
 
 
 
@@ -114,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="http://luzhiming.github.io/2017/10/10/视频教程/设计模式/单例模式/"/>
+  <link rel="canonical" href="http://luzhiming.github.io/2018/01/19/Netty/6.Netty-编码解码/"/>
 
 
 
 
 
-  <title>设计模式-单例模式 | MarsYi.com-码上益</title>
+  <title>Netty-编解码 | MarsYi.com-码上益</title>
   
 
 
@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://luzhiming.github.io/2017/10/10/视频教程/设计模式/单例模式/">
+    <link itemprop="mainEntityOfPage" href="http://luzhiming.github.io/2018/01/19/Netty/6.Netty-编码解码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarsYi.com-码上益">
@@ -258,7 +258,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">设计模式-单例模式</h2>
+          <h2 class="post-title" itemprop="name headline">Netty-编解码</h2>
         
 
         <div class="post-meta">
@@ -270,8 +270,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-10T10:15:13+08:00">
-                2017-10-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-19T09:25:18+08:00">
+                2018-01-19
               </time>
             
 
@@ -280,39 +280,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/视频教程/" itemprop="url" rel="index">
-                    <span itemprop="name">视频教程</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/视频教程/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -341,8 +308,30 @@
       
 
       
-        <p>单例模式模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。<br><a id="more"></a></p>
-<h2 id="什么是单例模式"><a href="#什么是单例模式" class="headerlink" title="什么是单例模式"></a>什么是单例模式</h2>
+        <p>Netty-编解码</p>
+<a id="more"></a>
+<h2 id="Netty处理器的重要概念"><a href="#Netty处理器的重要概念" class="headerlink" title="Netty处理器的重要概念:"></a>Netty处理器的重要概念:</h2><ol>
+<li>Netty的处理器可以分为两类: 入栈处理器与出栈处理器</li>
+<li>入栈处理器的顶层是ChannelInboudHandler ， 出栈处理器的顶层是ChannelOutboudHandler。</li>
+<li>数据处理时常用的各种编解码器本质上都是处理器</li>
+<li>编解码器: 无论我们向网络中写入的数据是什么类型(int,char,String,二进制)最终在网络流动的时候，其都是以字节流的形式呈现的；<br>将数据由原来的格式转换为字节流的操作为编码(encode)，将字节流转换到其真正的格式称为解码(decode)</li>
+<li>编码: 出栈操作，程序-&gt;网络，本质上是一种出栈处理器，编码一定是ChannelOutboudHandler.</li>
+<li>解码: 入栈操作，网络-&gt;程序，本质上是一种入栈处理器，解码一定是ChannelInboudHandler.</li>
+<li>Netty中，编码器通常以XXXEncoder命名；解码器通常以XXXDecoder命名。</li>
+<li>另外ChannelPipeline存放的是ChannelHandlerContext,ChannnelHandlerContext封装了当前Handler和Channel，且ChannelHandlerContext有连个属性<strong>isInboud</strong> 和 <strong>isOutBoud</strong> 来确定当前Handler是出栈还是入栈<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isInbound</span><span class="params">(ChannelHandler handler)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> handler <span class="keyword">instanceof</span> ChannelInboundHandler;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isOutbound</span><span class="params">(ChannelHandler handler)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> handler <span class="keyword">instanceof</span> ChannelOutboundHandler;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="关于Netty编解码器的重要结论"><a href="#关于Netty编解码器的重要结论" class="headerlink" title="关于Netty编解码器的重要结论"></a>关于Netty编解码器的重要结论</h3><ol>
+<li>无论是编码器还是解码器，其接受的消息累心必须要与待处理的参数类型一直，否则该编码器或解码器并不会被执行</li>
+<li>在编码器进行数据解码时，一定要记得判断ByteBuf中的数据是否足够，否则将产生一些问题</li>
+<li>一个简单的编解码器–将Long字节类型转换为Message（Decoder），或者将Long转换为字节（Encoder）<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Decoder</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLongDecoder</span> <span class="keyword">extends</span> <span class="title">ByteToMessageDecoder</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">decode</span><span class="params">(ChannelHandlerContext ctx, ByteBuf in, List&lt;Object&gt; out)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        System.out.println(<span class="string">"decoder invoked! and readablebytes is --"</span> + in.readableBytes());</div><div class="line">        <span class="keyword">if</span>(in.readableBytes() &gt;= Long.BYTES)&#123;</div><div class="line">            out.add(in.readLong());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Encoder</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLongEncoder</span> <span class="keyword">extends</span> <span class="title">MessageToByteEncoder</span>&lt;<span class="title">Long</span>&gt; </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">encode</span><span class="params">(ChannelHandlerContext ctx, Long msg, ByteBuf out)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        out.writeLong(msg);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 正常写一个Decoder的例子</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntegerHeaderFrameDecoder</span> <span class="keyword">extends</span> <span class="title">ByteToMessageDecoder</span> </span>&#123;</div><div class="line">  </div><div class="line">      <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">decode</span><span class="params">(ChannelHandlerContext ctx,</span></span></div><div class="line"><span class="function"><span class="params">                             ByteBuf buf, List&lt;Object&gt; out)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">  </div><div class="line">       <span class="keyword">if</span> (buf.readableBytes() &lt; <span class="number">4</span>) &#123;</div><div class="line">          <span class="keyword">return</span>;</div><div class="line">       &#125;</div><div class="line">  </div><div class="line">       buf.markReaderIndex();</div><div class="line">       <span class="keyword">int</span> length = buf.readInt();</div><div class="line">  </div><div class="line">       <span class="keyword">if</span> (buf.readableBytes() &lt; length) &#123;</div><div class="line">          buf.resetReaderIndex();</div><div class="line">          <span class="keyword">return</span>;</div><div class="line">       &#125;</div><div class="line">  </div><div class="line">       out.add(buf.readBytes(length));</div><div class="line">     &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="ReplayingDecoder-amp-ReplayingEncoder"><a href="#ReplayingDecoder-amp-ReplayingEncoder" class="headerlink" title="ReplayingDecoder &amp; ReplayingEncoder"></a>ReplayingDecoder &amp; ReplayingEncoder</h3><p>1.如果数据足够的话，就读取数据。如果数据不够的话，会报出error，当出现error的时候，会将Bytebuf的读索引初始化.之后进行<strong>重复读取</strong></p>
+<h3 id="LengthFieldBasedFrameDecoder"><a href="#LengthFieldBasedFrameDecoder" class="headerlink" title="LengthFieldBasedFrameDecoder"></a>LengthFieldBasedFrameDecoder</h3><h2 id="TCP粘包与拆包"><a href="#TCP粘包与拆包" class="headerlink" title="TCP粘包与拆包"></a>TCP粘包与拆包</h2><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>1.TCP是面向连接的，先发的先到，后发的后到。即流式<br>2.产生沾包与拆包的原因，接受消息的端并不知道具体的消息长度或者说哪些消息是一条消息</p>
+<h3 id="如何解决这个问题"><a href="#如何解决这个问题" class="headerlink" title="如何解决这个问题"></a>如何解决这个问题</h3><p>1.自定义协议，一般通过自定义协议的方式，比如:[4个字节-表示消息体长度][消息体字节]</p>
+<h2 id="参考材料"><a href="#参考材料" class="headerlink" title="参考材料"></a>参考材料</h2><p><a href="http://iprogramming.cn" target="_blank" rel="external">张龙老师授课资料</a></p>
+
       
     </div>
 	
@@ -409,7 +398,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+            <a href="/tags/Netty/" rel="tag"># Netty</a>
+          
+            <a href="/tags/ByteBuf/" rel="tag"># ByteBuf</a>
           
         </div>
       
@@ -437,8 +428,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/09/随笔/如何利用github+hexo搭建一个个人网页/" rel="next" title="如何利用github+hexo搭建一个个人网页">
-                <i class="fa fa-chevron-left"></i> 如何利用github+hexo搭建一个个人网页
+              <a href="/2017/12/25/随笔/Git使用小结/" rel="next" title="Git使用小结">
+                <i class="fa fa-chevron-left"></i> Git使用小结
               </a>
             
           </div>
@@ -447,8 +438,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/10/随笔/Idea常用快捷键总结/" rel="prev" title="Idea常用快捷键总结">
-                Idea常用快捷键总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/26/jvm/1.JVM学习方法论/" rel="prev" title="JVM学习方法论">
+                JVM学习方法论 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -601,7 +592,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是单例模式"><span class="nav-number">1.</span> <span class="nav-text">什么是单例模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Netty处理器的重要概念"><span class="nav-number">1.</span> <span class="nav-text">Netty处理器的重要概念:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于Netty编解码器的重要结论"><span class="nav-number">1.1.</span> <span class="nav-text">关于Netty编解码器的重要结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReplayingDecoder-amp-ReplayingEncoder"><span class="nav-number">1.2.</span> <span class="nav-text">ReplayingDecoder & ReplayingEncoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LengthFieldBasedFrameDecoder"><span class="nav-number">1.3.</span> <span class="nav-text">LengthFieldBasedFrameDecoder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP粘包与拆包"><span class="nav-number">2.</span> <span class="nav-text">TCP粘包与拆包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原因"><span class="nav-number">2.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何解决这个问题"><span class="nav-number">2.2.</span> <span class="nav-text">如何解决这个问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考材料"><span class="nav-number">3.</span> <span class="nav-text">参考材料</span></a></li></ol></div>
             
 
           </div>

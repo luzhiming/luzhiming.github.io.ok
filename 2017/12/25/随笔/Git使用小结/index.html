@@ -80,7 +80,7 @@
 <meta property="og:site_name" content="MarsYi.com-码上益">
 <meta property="og:description" content="本文记录了git的简单的一些常用命令以及部分最佳实践，欢迎大家阅读。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-25T09:58:02.501Z">
+<meta property="og:updated_time" content="2017-12-25T11:45:47.147Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git使用小结">
 <meta name="twitter:description" content="本文记录了git的简单的一些常用命令以及部分最佳实践，欢迎大家阅读。">
@@ -342,7 +342,7 @@
 <h4 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git merge branchName</div></pre></td></tr></table></figure>
 <h3 id="远程分支-GitHub代替讲解"><a href="#远程分支-GitHub代替讲解" class="headerlink" title="远程分支-GitHub代替讲解"></a>远程分支-GitHub代替讲解</h3><h4 id="新建立一个github仓库"><a href="#新建立一个github仓库" class="headerlink" title="新建立一个github仓库"></a>新建立一个github仓库</h4><p>ii.    建立远程分支:git remove add remoeteBranchName url </p>
 <ol>
-<li>【路径: .git/refs/remotes】<h4 id="建立远程分支与本地分支的关联"><a href="#建立远程分支与本地分支的关联" class="headerlink" title="建立远程分支与本地分支的关联"></a>建立远程分支与本地分支的关联</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch –set-upstream branch_name</div></pre></td></tr></table></figure>
+<li>【路径: .git/refs/remotes】<h4 id="建立远程分支与本地分支的关联"><a href="#建立远程分支与本地分支的关联" class="headerlink" title="建立远程分支与本地分支的关联"></a>建立远程分支与本地分支的关联</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git branch –set-upstream branch_name</div><div class="line">git branch --set-upstream-to=origin/remote_branch  your_branch</div><div class="line">remote_branch:远程分支的名字</div><div class="line">your_branch:本地分支的名字</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <h4 id="推送到远程分支"><a href="#推送到远程分支" class="headerlink" title="推送到远程分支"></a>推送到远程分支</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin HEAD:master</div></pre></td></tr></table></figure>
@@ -460,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/21/Netty/3.Netty宏观总结/" rel="next" title="Netty宏观总结">
-                <i class="fa fa-chevron-left"></i> Netty宏观总结
+              <a href="/2017/12/21/Netty/5.Netty-引用计数/" rel="next" title="Netty-ByteBuf">
+                <i class="fa fa-chevron-left"></i> Netty-ByteBuf
               </a>
             
           </div>
@@ -469,6 +469,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/19/Netty/6.Netty-编码解码/" rel="prev" title="Netty-编解码">
+                Netty-编解码 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -549,7 +553,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -571,7 +575,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -640,7 +644,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-"></i>
   </span>

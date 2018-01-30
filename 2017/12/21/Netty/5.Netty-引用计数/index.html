@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="设计模式," />
+  <meta name="keywords" content="Netty,ByteBuf," />
 
 
 
@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="单例模式模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。">
-<meta name="keywords" content="设计模式">
+<meta name="description" content="Netty-引用计数相关内容">
+<meta name="keywords" content="Netty,ByteBuf">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式-单例模式">
-<meta property="og:url" content="http://luzhiming.github.io/2017/10/10/视频教程/设计模式/单例模式/index.html">
+<meta property="og:title" content="Netty-ByteBuf">
+<meta property="og:url" content="http://luzhiming.github.io/2017/12/21/Netty/5.Netty-引用计数/index.html">
 <meta property="og:site_name" content="MarsYi.com-码上益">
-<meta property="og:description" content="单例模式模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。">
+<meta property="og:description" content="Netty-引用计数相关内容">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-10T05:16:21.097Z">
+<meta property="og:updated_time" content="2018-01-17T00:50:17.408Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式-单例模式">
-<meta name="twitter:description" content="单例模式模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。">
+<meta name="twitter:title" content="Netty-ByteBuf">
+<meta name="twitter:description" content="Netty-引用计数相关内容">
 
 
 
@@ -114,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="http://luzhiming.github.io/2017/10/10/视频教程/设计模式/单例模式/"/>
+  <link rel="canonical" href="http://luzhiming.github.io/2017/12/21/Netty/5.Netty-引用计数/"/>
 
 
 
 
 
-  <title>设计模式-单例模式 | MarsYi.com-码上益</title>
+  <title>Netty-ByteBuf | MarsYi.com-码上益</title>
   
 
 
@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://luzhiming.github.io/2017/10/10/视频教程/设计模式/单例模式/">
+    <link itemprop="mainEntityOfPage" href="http://luzhiming.github.io/2017/12/21/Netty/5.Netty-引用计数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarsYi.com-码上益">
@@ -258,7 +258,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">设计模式-单例模式</h2>
+          <h2 class="post-title" itemprop="name headline">Netty-ByteBuf</h2>
         
 
         <div class="post-meta">
@@ -270,8 +270,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-10T10:15:13+08:00">
-                2017-10-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T09:25:18+08:00">
+                2017-12-21
               </time>
             
 
@@ -280,39 +280,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/视频教程/" itemprop="url" rel="index">
-                    <span itemprop="name">视频教程</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/视频教程/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -341,8 +308,25 @@
       
 
       
-        <p>单例模式模式是设计模式中非常重要的一个模式，其思想引导了很多框架的设计。学习观察者模式对于在开发中设计优良的架构有非常重要的意义。<br><a id="more"></a></p>
-<h2 id="什么是单例模式"><a href="#什么是单例模式" class="headerlink" title="什么是单例模式"></a>什么是单例模式</h2>
+        <p>Netty-引用计数相关内容</p>
+<a id="more"></a>
+<h1 id="接口-io-netty-util-ReferenceCounted"><a href="#接口-io-netty-util-ReferenceCounted" class="headerlink" title="接口 io.netty.util.ReferenceCounted"></a>接口 io.netty.util.ReferenceCounted</h1><p>一个对象被创建的同时，其应用计数为1.retain()引用计数加1，release()引用计数减1。当引用计数为0的时候，被显示的释放</p>
+<h2 id="一些方法说明"><a href="#一些方法说明" class="headerlink" title="一些方法说明"></a>一些方法说明</h2><ul>
+<li>refCnt() 返回引用计数的数量</li>
+<li>retain() 引用计数+1</li>
+<li>retain(int increment) 引用计数+increment</li>
+<li>release() 计数减1</li>
+<li>release(int decrement) 计数-decrement</li>
+</ul>
+<h1 id="AbstractReferenceCountedByteBuf"><a href="#AbstractReferenceCountedByteBuf" class="headerlink" title="AbstractReferenceCountedByteBuf"></a>AbstractReferenceCountedByteBuf</h1><h2 id="retain-方法讲解"><a href="#retain-方法讲解" class="headerlink" title="retain() 方法讲解"></a>retain() 方法讲解</h2><p>refCntUpdater.compareAndSet(this, refCnt, nextCnt):cas<br>for(;;)xxx：自旋锁，自己占用cpu的时间，一直等更新成功</p>
+<p>其中<strong>refCnt 初始值是1 </strong>而且是 <strong>volitile</strong> 修饰的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> ByteBuf <span class="title">retain0</span><span class="params">(<span class="keyword">int</span> increment)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (;;) &#123;</div><div class="line">            <span class="keyword">int</span> refCnt = <span class="keyword">this</span>.refCnt;</div><div class="line">            <span class="keyword">final</span> <span class="keyword">int</span> nextCnt = refCnt + increment;</div><div class="line">			<span class="comment">// 这个判断的原因是，当refCnt为0的时候是应该被回收的，是不能操作ByteBuf的, 万一refCnt为0 且又使用了ByteBuf，则会抛出 IllegalReferenceCountException 异常</span></div><div class="line">            <span class="keyword">if</span> (nextCnt &lt;= increment) &#123;</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalReferenceCountException(refCnt, increment);</div><div class="line">            &#125;</div><div class="line">			<span class="comment">// refCntUpdater是AtomicIntegerFieldUpdater类型的，原子整型字段更新器，compareAndSet,cas。以原子的形式来去更新。</span></div><div class="line">            <span class="keyword">if</span> (refCntUpdater.compareAndSet(<span class="keyword">this</span>, refCnt, nextCnt)) &#123;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">表示的是当前refCntUpdater管理的是AbstractReferenceCountedByteBuf类的refCnt属性</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> AtomicIntegerFieldUpdater&lt;AbstractReferenceCountedByteBuf&gt; refCntUpdater = AtomicIntegerFieldUpdater.newUpdater(AbstractReferenceCountedByteBuf.class, <span class="string">"refCnt"</span>);</div><div class="line">**注意refCnt必须是<span class="keyword">volatile</span>的**</div><div class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> refCnt = <span class="number">1</span>;</div><div class="line"></div><div class="line">而compareAndSet(<span class="keyword">this</span>, temRefCnt, nextCnt) - cas</div><div class="line">是为了将当前对象<span class="keyword">this</span>，由临时变量temFefCnt 与 当前refCntUpdater所管理的属性变量 refCnt 进行比较，如果temRefCnt == refCnt , 则把refCnt原子的变为我们期望的值nextCnt</div><div class="line"></div><div class="line">与AtomicIntegerFiledUpdater类似的还有AtomicLongFieldUpdater还有 AtomicReferenceUpdater</div></pre></td></tr></table></figure>
+<h2 id="AtomicIntegerFieldUpdater-要点总结"><a href="#AtomicIntegerFieldUpdater-要点总结" class="headerlink" title="AtomicIntegerFieldUpdater 要点总结"></a>AtomicIntegerFieldUpdater 要点总结</h2><p>1.更新器更新的必须是int类型的变量，不能是其包装类型<br>2.更新器更新的必须是volatile类型的变量（volatile作用:1.防止指令的重排序，为了按照jvm的规则优化，提升性能 2.保证线程之间的可见性，即内存可见性）<br><strong>3.配合volatile与cas的方式来实现线程的安全，单纯的volatile是保证不了线程安全的</strong><br>4.变量不能是statis的，必须是实例变量。因为Unsafe.objectFieldOffset()方法不支持静态变量（CAS操作本质上是通过对象实例的偏移量来进行赋值）<br>5.更新器智能修改它可见范围内的变量，因为更i吸奶器是通过反射来得到这个变量，如果变量不可见就会报错。</p>
+<p>如果要更新的变量是包装类型，那么可以使用AtomicReferenceFieldUpdater来更新</p>
+<h2 id="为什么不用AtomicInteger"><a href="#为什么不用AtomicInteger" class="headerlink" title="为什么不用AtomicInteger?"></a>为什么不用AtomicInteger?</h2><p>AtomicInteger肯定是可以的，但是这就需要每个ByteBuf都有一个AtomicInteger。在性能上有稍微的影响，Netty的ByteBuf中的AtomicIntegerFieldUpdater是static的，也就是说，是全局的，不用每个ByteBuf都有一份。</p>
+<h2 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h2><p>1.Unpooled的堆缓冲，借助jvm的gc机制来释放ByteBuf,当引用计数为0的时候，被显示的释放。ByteBuf内维护的bytep[] array 设置为 null<br>2.Pooled堆缓冲</p>
+
       
     </div>
 	
@@ -409,7 +393,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+            <a href="/tags/Netty/" rel="tag"># Netty</a>
+          
+            <a href="/tags/ByteBuf/" rel="tag"># ByteBuf</a>
           
         </div>
       
@@ -437,8 +423,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/09/随笔/如何利用github+hexo搭建一个个人网页/" rel="next" title="如何利用github+hexo搭建一个个人网页">
-                <i class="fa fa-chevron-left"></i> 如何利用github+hexo搭建一个个人网页
+              <a href="/2017/12/21/JavaNio/1.Java NIO中，关于DirectBuffer，HeapBuffer的疑问【转】/" rel="next" title="Netty宏观总结">
+                <i class="fa fa-chevron-left"></i> Netty宏观总结
               </a>
             
           </div>
@@ -447,8 +433,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/10/随笔/Idea常用快捷键总结/" rel="prev" title="Idea常用快捷键总结">
-                Idea常用快捷键总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/25/随笔/Git使用小结/" rel="prev" title="Git使用小结">
+                Git使用小结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -601,7 +587,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是单例模式"><span class="nav-number">1.</span> <span class="nav-text">什么是单例模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#接口-io-netty-util-ReferenceCounted"><span class="nav-number">1.</span> <span class="nav-text">接口 io.netty.util.ReferenceCounted</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些方法说明"><span class="nav-number">1.1.</span> <span class="nav-text">一些方法说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AbstractReferenceCountedByteBuf"><span class="nav-number">2.</span> <span class="nav-text">AbstractReferenceCountedByteBuf</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#retain-方法讲解"><span class="nav-number">2.1.</span> <span class="nav-text">retain() 方法讲解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AtomicIntegerFieldUpdater-要点总结"><span class="nav-number">2.2.</span> <span class="nav-text">AtomicIntegerFieldUpdater 要点总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么不用AtomicInteger"><span class="nav-number">2.3.</span> <span class="nav-text">为什么不用AtomicInteger?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存泄漏"><span class="nav-number">2.4.</span> <span class="nav-text">内存泄漏</span></a></li></ol></li></ol></div>
             
 
           </div>

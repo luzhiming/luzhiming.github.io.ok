@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="MarsYi.com-码上益">
 <meta property="og:description" content="Netty-ByteBuf的较为详细的介绍，欢迎大家阅读并指正。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-25T01:35:05.383Z">
+<meta property="og:updated_time" content="2017-12-26T01:26:00.930Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty-ByteBuf">
 <meta name="twitter:description" content="Netty-ByteBuf的较为详细的介绍，欢迎大家阅读并指正。">
@@ -329,16 +329,16 @@
 <li><h3 id="非池化的-1"><a href="#非池化的-1" class="headerlink" title="非池化的"></a>非池化的</h3></li>
 </ol>
 <h2 id="3-composite-buffer-复合缓冲区-含了其他Buffer的Buffer-（-）"><a href="#3-composite-buffer-复合缓冲区-含了其他Buffer的Buffer-（-）" class="headerlink" title="3.composite buffer - 复合缓冲区 - 含了其他Buffer的Buffer （**）"></a>3.composite buffer - 复合缓冲区 - 含了其他Buffer的Buffer （<em>**</em>）</h2><p>这是一种虚拟的缓冲区，是一个缓冲区列表。可以存放heap buffer 也可以存放 direct buffer<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CompositeByteBuf byteBufs = Unpooled.compositeBuffer();</div><div class="line">      ByteBuf heapBuffer = Unpooled.buffer();</div><div class="line">      ByteBuf directByteBuf = Unpooled.directBuffer();</div><div class="line">      byteBufs.addComponents(heapBuffer,directByteBuf);</div></pre></td></tr></table></figure></p>
-<h1 id="Netty的ByteBuf-和-Java-ByteBuffer的对比"><a href="#Netty的ByteBuf-和-Java-ByteBuffer的对比" class="headerlink" title="Netty的ByteBuf 和 Java ByteBuffer的对比"></a>Netty的ByteBuf 和 Java ByteBuffer的对比</h1><ol>
-<li>Netty的ByteBuf采用了读写索引分离的策略，分别提供了readerIndex和writerIndex,一个初始化的ByteBuf他的readerIndex和writerIndex都是0.</li>
+<h1 id="Netty的ByteBuf-和-Java-ByteBuffer的对比"><a href="#Netty的ByteBuf-和-Java-ByteBuffer的对比" class="headerlink" title="Netty的ByteBuf 和 Java ByteBuffer的对比"></a>Netty的ByteBuf 和 Java ByteBuffer的对比</h1><ul>
+<li>Netty的ByteBuf采用了读写索引分离的策略，分别提供了readerIndex和writerIndex,一个初始化的ByteBuf他的readerIndex和writerIndex都是0.。而JDK的ByteBuffer只是用一个position索引，读写需要调用flip方法，使用不方便。</li>
 <li>当读索引与写索引处于同一个位置时，如果我们继续读取那就会抛出<strong>IndexOutofBoudsException</strong></li>
 <li>对于ByteBuf的任何读写操作，都会分别单独维护读索引与写索引。</li>
-<li>Netty的ByteBuf自动扩容，maxCapacity最大容量是Indeger.MAX_VALUE<h2 id="自动扩容-内存拷贝"><a href="#自动扩容-内存拷贝" class="headerlink" title="自动扩容-内存拷贝"></a>自动扩容-内存拷贝</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">memoryCopy</span><span class="params">(<span class="keyword">byte</span>[] src, <span class="keyword">int</span> srcOffset, <span class="keyword">byte</span>[] dst, <span class="keyword">int</span> dstOffset, <span class="keyword">int</span> length)</span> </span>&#123;</div><div class="line">          <span class="keyword">if</span> (length == <span class="number">0</span>) &#123;</div><div class="line">              <span class="keyword">return</span>;</div><div class="line">          &#125;</div><div class="line">          System.arraycopy(src, srcOffset, dst, dstOffset, length);</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
+<li>Netty的ByteBuf自动扩容，maxCapacity最大容量是Indeger.MAX_VALUE，write的时候会判断空间是否足够， </li>
+<li>Java的ByteBuffer内部使用的是<strong>final byte[] hb</strong>实现的，即hb是不可变的。也就是说，不支持扩容,不可以将hb指向新的对象了，不可变。而且当待存储的数据字节很大的时候很有可能出现<strong>IndexOutOfBoudsException</strong>.<br>要预防这个异常，在存储之前需要确定好字节大小。如果不足，我们只有一种解决方案:创建一个全新的ByteBuffer对象，然后再将之前的数据复制过去，这一切操作需要由开发者自己手动完成</li>
+</ul>
+<h2 id="ByteBuf自动扩容-内存拷贝"><a href="#ByteBuf自动扩容-内存拷贝" class="headerlink" title="ByteBuf自动扩容-内存拷贝"></a>ByteBuf自动扩容-内存拷贝</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">      <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">memoryCopy</span><span class="params">(<span class="keyword">byte</span>[] src, <span class="keyword">int</span> srcOffset, <span class="keyword">byte</span>[] dst, <span class="keyword">int</span> dstOffset, <span class="keyword">int</span> length)</span> </span>&#123;</div><div class="line">          <span class="keyword">if</span> (length == <span class="number">0</span>) &#123;</div><div class="line">              <span class="keyword">return</span>;</div><div class="line">          &#125;</div><div class="line">          System.arraycopy(src, srcOffset, dst, dstOffset, length);</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
 <p>读写的相对与绝对方法:即通过索引来访问Byte的时并不会改版真实的读索引与写索引；我们可以通过ByteBuf的readeXX和writeXX方法分别直接修改读索引与写索引<br>buffer.writeByte(value) //相对方法，writerIndex会+1<br>buffer.getByte(value) //绝对方法，readIndex不会+1<br>buffer.readByte() // 相对方法，readerIndex会+1</p>
 <p>hasArray()<br>true：表示是堆上的，堆上的是通过byte 数组来维护的<br>false：表示是直接缓冲</p>
-<p>//作业<br>符合缓冲区<br>引用计数器<br>比较与传统ByteBuffer的区别</p>
 
       
     </div>
@@ -446,7 +446,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/21/JavaNio/1.Java NIO中，关于DirectBuffer，HeapBuffer的疑问【转】/" rel="prev" title="Netty宏观总结">
+              <a href="/2017/12/21/Netty/3.Netty宏观总结/" rel="prev" title="Netty宏观总结">
                 Netty宏观总结 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -529,7 +529,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -551,7 +551,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -600,7 +600,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#传统Java-Buffer-文件读写的一般步骤"><span class="nav-number">1.</span> <span class="nav-text">传统Java Buffer 文件读写的一般步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ByteBuf-分析"><span class="nav-number">2.</span> <span class="nav-text">ByteBuf 分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引结构"><span class="nav-number">3.</span> <span class="nav-text">索引结构:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty-ByteBuf的3种"><span class="nav-number">4.</span> <span class="nav-text">Netty ByteBuf的3种</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-heap-buffer-堆上的缓存（对于后端的业务编解码来说，推荐使用HeapBytebuffer，如我们自己编写的Handler做业务逻辑的时候）"><span class="nav-number">4.1.</span> <span class="nav-text">1.heap buffer - 堆上的缓存（对于后端的业务编解码来说，推荐使用HeapBytebuffer，如我们自己编写的Handler做业务逻辑的时候）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#池化的"><span class="nav-number">4.1.1.</span> <span class="nav-text">池化的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非池化的"><span class="nav-number">4.1.2.</span> <span class="nav-text">非池化的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-direct-buffer-直接缓冲区-（对于I-O通信线程在读写缓冲区的时候，推进使用DirectByteBuf-这样减少了一次拷贝，即0拷贝）"><span class="nav-number">4.2.</span> <span class="nav-text">2.direct buffer - 直接缓冲区 （对于I/O通信线程在读写缓冲区的时候，推进使用DirectByteBuf,这样减少了一次拷贝，即0拷贝）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#池化的-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">池化的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非池化的-1"><span class="nav-number">4.2.2.</span> <span class="nav-text">非池化的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-composite-buffer-复合缓冲区-含了其他Buffer的Buffer-（-）"><span class="nav-number">4.3.</span> <span class="nav-text">3.composite buffer - 复合缓冲区 - 含了其他Buffer的Buffer （**）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty的ByteBuf-和-Java-ByteBuffer的对比"><span class="nav-number">5.</span> <span class="nav-text">Netty的ByteBuf 和 Java ByteBuffer的对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自动扩容-内存拷贝"><span class="nav-number">5.1.</span> <span class="nav-text">自动扩容-内存拷贝</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#传统Java-Buffer-文件读写的一般步骤"><span class="nav-number">1.</span> <span class="nav-text">传统Java Buffer 文件读写的一般步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ByteBuf-分析"><span class="nav-number">2.</span> <span class="nav-text">ByteBuf 分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引结构"><span class="nav-number">3.</span> <span class="nav-text">索引结构:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty-ByteBuf的3种"><span class="nav-number">4.</span> <span class="nav-text">Netty ByteBuf的3种</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-heap-buffer-堆上的缓存（对于后端的业务编解码来说，推荐使用HeapBytebuffer，如我们自己编写的Handler做业务逻辑的时候）"><span class="nav-number">4.1.</span> <span class="nav-text">1.heap buffer - 堆上的缓存（对于后端的业务编解码来说，推荐使用HeapBytebuffer，如我们自己编写的Handler做业务逻辑的时候）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#池化的"><span class="nav-number">4.1.1.</span> <span class="nav-text">池化的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非池化的"><span class="nav-number">4.1.2.</span> <span class="nav-text">非池化的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-direct-buffer-直接缓冲区-（对于I-O通信线程在读写缓冲区的时候，推进使用DirectByteBuf-这样减少了一次拷贝，即0拷贝）"><span class="nav-number">4.2.</span> <span class="nav-text">2.direct buffer - 直接缓冲区 （对于I/O通信线程在读写缓冲区的时候，推进使用DirectByteBuf,这样减少了一次拷贝，即0拷贝）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#池化的-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">池化的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非池化的-1"><span class="nav-number">4.2.2.</span> <span class="nav-text">非池化的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-composite-buffer-复合缓冲区-含了其他Buffer的Buffer-（-）"><span class="nav-number">4.3.</span> <span class="nav-text">3.composite buffer - 复合缓冲区 - 含了其他Buffer的Buffer （**）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty的ByteBuf-和-Java-ByteBuffer的对比"><span class="nav-number">5.</span> <span class="nav-text">Netty的ByteBuf 和 Java ByteBuffer的对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ByteBuf自动扩容-内存拷贝"><span class="nav-number">5.1.</span> <span class="nav-text">ByteBuf自动扩容-内存拷贝</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -620,7 +620,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-"></i>
   </span>

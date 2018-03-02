@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="JVM助记符">
+<meta name="description" content="接口初始化与类初始化的异同">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM助记符总结">
-<meta property="og:url" content="http://luzhiming.github.io/2018/01/26/jvm/0.JVM-总结-助记符总结/index.html">
+<meta property="og:title" content="JVM-初始化阶段与准备阶段例子剖析">
+<meta property="og:url" content="http://luzhiming.github.io/2018/03/02/jvm/6.JVM-接口初始化与类初始化的异同/index.html">
 <meta property="og:site_name" content="MarsYi.com-码上益">
-<meta property="og:description" content="JVM助记符">
+<meta property="og:description" content="接口初始化与类初始化的异同">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-12T05:32:52.402Z">
+<meta property="og:updated_time" content="2018-03-02T03:44:48.579Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JVM助记符总结">
-<meta name="twitter:description" content="JVM助记符">
+<meta name="twitter:title" content="JVM-初始化阶段与准备阶段例子剖析">
+<meta name="twitter:description" content="接口初始化与类初始化的异同">
 
 
 
@@ -114,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="http://luzhiming.github.io/2018/01/26/jvm/0.JVM-总结-助记符总结/"/>
+  <link rel="canonical" href="http://luzhiming.github.io/2018/03/02/jvm/6.JVM-接口初始化与类初始化的异同/"/>
 
 
 
 
 
-  <title>JVM助记符总结 | MarsYi.com-码上益</title>
+  <title>JVM-初始化阶段与准备阶段例子剖析 | MarsYi.com-码上益</title>
   
 
 
@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://luzhiming.github.io/2018/01/26/jvm/0.JVM-总结-助记符总结/">
+    <link itemprop="mainEntityOfPage" href="http://luzhiming.github.io/2018/03/02/jvm/6.JVM-接口初始化与类初始化的异同/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarsYi.com-码上益">
@@ -258,7 +258,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">JVM助记符总结</h2>
+          <h2 class="post-title" itemprop="name headline">JVM-初始化阶段与准备阶段例子剖析</h2>
         
 
         <div class="post-meta">
@@ -270,8 +270,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-26T09:25:18+08:00">
-                2018-01-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-02T09:25:18+08:00">
+                2018-03-02
               </time>
             
 
@@ -308,18 +308,15 @@
       
 
       
-        <p>JVM助记符</p>
+        <p>接口初始化与类初始化的异同</p>
 <a id="more"></a>
-<h2 id="助记符-变量"><a href="#助记符-变量" class="headerlink" title="助记符-变量"></a>助记符-变量</h2><ul>
-<li>idc 表示将int，float或是String类型常量值从常量池中推送到栈顶</li>
-<li>bipush 表示将单字节(-128~127) 的常量值推送到栈顶</li>
-<li>sipush 表示将一个短整型常量值(-32768-32767)推送到栈顶</li>
-<li>iconst_1 表示将int类型的1推送到栈顶(iconst_1 ~ iconst_5 , 一共5个)</li>
+<h2 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h2><h2 id="异同"><a href="#异同" class="headerlink" title="异同"></a>异同</h2><ul>
+<li>当Java虚拟机初始化一个类的时候，要求它的所有父类都已经被初始化，但是这不适用于接口</li>
+<li>初始化一个类的时候，不会初始化其实现的接口</li>
+<li>初始化一个接口的时候，也不会初始化其父接口</li>
+<li>接口只会在程序首次使用其静态变量的时候才会初始化</li>
 </ul>
-<h2 id="助记符-数组"><a href="#助记符-数组" class="headerlink" title="助记符-数组"></a>助记符-数组</h2><ul>
-<li>anewarray： 表示创建一个引用类型的数组（如类，接口，数组的数组），并将其引用值压入栈顶</li>
-<li>newarray： 表示创建一个指定的原始类型的数组(如 int、float，char等)的数组，并将其引用值压入栈顶</li>
-</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest7</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">/**</span></div><div class="line"><span class="comment">         * ------------------------------------------------------------------------------------------------</span></div><div class="line"><span class="comment">         * 对于MyChild7.a的static非final的主动使用，导致MyChild7的初始化</span></div><div class="line"><span class="comment">         * 但是其父接口MyParent7.trhead变量并没有被赋值，也就是初始化，如果初始化会打印出-MyParent7 invoked</span></div><div class="line"><span class="comment">         *</span></div><div class="line"><span class="comment">         * ------------------------------------------------------------------------------------------------</span></div><div class="line"><span class="comment">         * 对于MyChild7.a的static非final的主动使用，导致MyChild7的初始化</span></div><div class="line"><span class="comment">         * 如果MyParent7是一个类的话，那么MyParent7会被初始化[子类初始化，必先初始化其父类]，会打印出-MyParent7 invoked</span></div><div class="line"><span class="comment">         */</span></div><div class="line">        System.out.println(MyChild7.a);</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line"><span class="comment">         * -----------------------------------------------------------------------------------------------</span></div><div class="line"><span class="comment">         * MyChild7_1是一个接口，使用其static final的变量</span></div><div class="line"><span class="comment">         * 打印出了:</span></div><div class="line"><span class="comment">         * MyChild7_1 invoked</span></div><div class="line"><span class="comment">         *Thread[Thread-0,5,main]</span></div><div class="line"><span class="comment">         *</span></div><div class="line"><span class="comment">         * 代表:</span></div><div class="line"><span class="comment">         * MyChild7_1这个接口初始化了，但是其付接口MyParent7_1没有初始化</span></div><div class="line"><span class="comment">         */</span></div><div class="line">        System.out.println(MyChild7_1.thread);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">MyParent7</span></span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Thread thread = <span class="keyword">new</span> Thread()&#123;</div><div class="line">        &#123;</div><div class="line">            System.out.println(<span class="string">"MyParent7 invoked"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyChild7</span> <span class="keyword">implements</span> <span class="title">MyParent7</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</div><div class="line">    <span class="comment">// 每次创建C的实例都会被执行，执行完之后才执行构造方法</span></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"构造实例块"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">C</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"构造方法执行"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">MyParent7_1</span></span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Thread thread = <span class="keyword">new</span> Thread()&#123;</div><div class="line">        &#123;</div><div class="line">            System.out.println(<span class="string">"MyParent7_1 invoked"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">MyChild7_1</span></span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Thread thread = <span class="keyword">new</span> Thread()&#123;</div><div class="line">        &#123;</div><div class="line">            System.out.println(<span class="string">"MyChild7_1 invoked"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="参考材料"><a href="#参考材料" class="headerlink" title="参考材料"></a>参考材料</h2><p><a href="http://iprogramming.cn" target="_blank" rel="external">张龙老师授课资料</a></p>
 
       
@@ -416,8 +413,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/26/jvm/0.JVM-总结-参数总结/" rel="next" title="JVM参数总结">
-                <i class="fa fa-chevron-left"></i> JVM参数总结
+              <a href="/2018/03/01/随笔/记录一个java.lang.UnsupportedOperationException异常/" rel="next" title="记录一个java.lang.UnsupportedOperationException异常">
+                <i class="fa fa-chevron-left"></i> 记录一个java.lang.UnsupportedOperationException异常
               </a>
             
           </div>
@@ -425,10 +422,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/12/jvm/3.JVM-数组/" rel="prev" title="JVM-数组">
-                JVM-数组 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -580,7 +573,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#助记符-变量"><span class="nav-number">1.</span> <span class="nav-text">助记符-变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#助记符-数组"><span class="nav-number">2.</span> <span class="nav-text">助记符-数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考材料"><span class="nav-number">3.</span> <span class="nav-text">参考材料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#加载"><span class="nav-number">1.</span> <span class="nav-text">加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异同"><span class="nav-number">2.</span> <span class="nav-text">异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考材料"><span class="nav-number">3.</span> <span class="nav-text">参考材料</span></a></li></ol></div>
             
 
           </div>
